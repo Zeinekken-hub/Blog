@@ -1,0 +1,5 @@
+C:\Users\Omen\Desktop\EpamHomeTaskMVC\BlogMvcApp\BlogMvcApp.DAL\bin\Debug\netstandard2.0\BlogMvcApp.DAL.deps.json
+C:\Users\Omen\Desktop\EpamHomeTaskMVC\BlogMvcApp\BlogMvcApp.DAL\bin\Debug\netstandard2.0\BlogMvcApp.DAL.dll
+C:\Users\Omen\Desktop\EpamHomeTaskMVC\BlogMvcApp\BlogMvcApp.DAL\obj\Debug\netstandard2.0\BlogMvcApp.DAL.csprojAssemblyReference.cache
+C:\Users\Omen\Desktop\EpamHomeTaskMVC\BlogMvcApp\BlogMvcApp.DAL\obj\Debug\netstandard2.0\BlogMvcApp.DAL.AssemblyInfoInputs.cache
+C:\Users\Omen\Desktop\EpamHomeTaskMVC\BlogMvcApp\BlogMvcApp.DAL\obj\Debug\netstandard2.0\BlogMvcApp.DAL.AssemblyInfo.cs

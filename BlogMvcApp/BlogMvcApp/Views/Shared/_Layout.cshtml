@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Blog</title>
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("~/Content/Site.css")
+</head>
+<body style="overflow-x:hidden" class="min-vw-100">
+    <a name="top" class="hide"></a>
+    <nav class="navbar navbar-light bg-light">
+        <div class="navbar-brand">
+            <img src="~/Content/logo.png" width="80" alt="Logo" />
+            <h4 class="d-inline-block ml-3">
+                Blog
+            </h4>
+        </div>
+    </nav>
+
+    <main class="min-vh-100">
+        <div class="row mt-3">
+            <div class="col-lg-1 col-sm-1"></div>
+            <div class="col-lg-8 col-sm-8 col-12">
+                @RenderBody()
+            </div>
+            <div class="col-sm-2 order-first order-sm-0">
+                <h6 class="text-center">Menu</h6>
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                @Html.ActionLink("Feedback", "Index", "Feedback", null, new { @class = "nav-link" })
+                @Html.ActionLink("Questionnaire", "Index", "Profile", null, new { @class = "nav-link" })
+            </div>
+            <div class="col-lg-1 col-sm-1"></div>
+        </div>
+    </main>
+
+    <footer class="footer bg-light mt-3 w-100">
+        <div class="container">
+            <p class="float-left text-muted mt-2">© Bohdan Mukha</p>
+            <a href="#top" class="card-link float-right mt-2">Back to top</a>
+        </div>
+    </footer>
+</body>
+</html>

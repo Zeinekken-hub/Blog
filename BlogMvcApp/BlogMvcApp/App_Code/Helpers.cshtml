@@ -1,0 +1,42 @@
+﻿@helper CreateCustomCheckBox(string name, string id, string labelText)
+{
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id=@id name=@name value="true"/>
+        <input class="custom-control-input" name=@name id=@id value="false" type="hidden" />
+        <label class="custom-control-label" for=@id>@labelText</label>
+    </div>
+}
+
+@helper CreateSelect(string name, List<string> options)
+{
+    <select name="@name" class="custom-select" required>
+        <option>Choose...</option>
+        @foreach (string option in options)
+        {
+            <option value=@option>@option</option>
+        }
+    </select>
+}
+
+@helper CreateCustomRadioButton(string name, string id, string value, string labelText)
+{
+    <div class="custom-control custom-radio">
+        <input type="radio" id=@id name=@name class="custom-control-input" value=@value>
+        <label class="custom-control-label" for=@id>@labelText</label>
+    </div>
+}
+
+@helper CreateArticle(string text, string header)
+{
+    <div class="card flex-md-row mb-4 box-shadow h-md-250">
+        <div class="card-body d-flex flex-column align-items-start">
+            <h3 class="mb-0">
+                <a class="text-dark" href="#">@header</a>
+            </h3>
+            <div class="mb-1 text-muted">Nov 12</div>
+            <p class="card-text mb-auto">@text</p>
+            <a href="#">Continue reading</a>
+        </div>
+    </div>
+
+}
