@@ -44,6 +44,11 @@ namespace BlogMvcApp.DLL.Repositories
             return _context.Feedbacks;
         }
 
+        public DbSet<Feedback> GetDbSet()
+        {
+            return _context.Feedbacks;
+        }
+
         public void Update(Feedback item)
         {
             _context.Entry(item).State = EntityState.Modified;

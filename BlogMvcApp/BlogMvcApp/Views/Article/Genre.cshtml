@@ -1,0 +1,10 @@
+﻿@model IEnumerable<BlogMvcApp.DLL.Entities.Article>
+
+@{
+    ViewBag.Title = "Genre";
+}
+
+<h2 class="text-center">All articles with Genre: "@(Model.ToList()[0].Genre.Name)"</h2>
+<hr />
+
+@Helpers.CreateArticles(Model)

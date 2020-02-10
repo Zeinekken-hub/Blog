@@ -1,0 +1,38 @@
+﻿@model BlogMvcApp.DLL.Entities.Article
+
+@{
+    ViewBag.Title = "Display";
+}
+
+<h2>
+    @Model.Title
+    <a class="float-right fa fa-trash mr-3" href="/Article/Delete/@Model.Id"></a>
+    <a class="float-right fa fa-edit mr-3" href="/Article/Edit/@Model.Id"></a>
+</h2>
+
+<div class="card flex-md-row mb-4 shadow">
+    <div class="card-body d-flex flex-column align-items-start">
+        <div class="mb-1 text-muted">
+            @Model.Date by
+            <i>@Model.Author</i>
+        </div>
+        <p class="card-text mb-auto">@Model.Text</p>
+    </div>
+</div>
+
+@foreach (var feedback in Model.Feedbacks)
+{
+    <div class="container mb-2 w-75">
+        <h2>@feedback.Author</h2>
+        <h6 class="text-muted">@feedback.Date</h6>
+        <p class="border rounded p-3">
+            @feedback.Text
+            <i class="float-right">@feedback.Mark / 5</i>
+        </p>
+    </div>
+}
+
+@Html.Partial("SendFeedback", new BlogMvcApp.DLL.Entities.Feedback
+{
+    ArticleId = Model.Id
+})

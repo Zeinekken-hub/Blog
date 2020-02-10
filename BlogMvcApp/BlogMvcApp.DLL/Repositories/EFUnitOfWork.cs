@@ -10,10 +10,21 @@ namespace BlogMvcApp.DLL.Repositories
         private readonly BlogContext _context;
         private ArticleRepository _articleRepository;
         private FeedbackRepository _feedbackRepository;
+        private GenreRepository _genreRepository;
 
         public EFUnitOfWork(string connection)
         {
             _context = new BlogContext(connection);
+        }
+
+        public IRepository<Genre> Genres
+        {
+            get
+            {
+                if (_genreRepository == null)
+                    _genreRepository = new GenreRepository(_context);
+                return _genreRepository;
+            }
         }
 
         public IRepository<Feedback> Feedbacks

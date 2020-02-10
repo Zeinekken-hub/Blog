@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace BlogMvcApp.DLL.Interfaces
 {
@@ -16,5 +17,7 @@ namespace BlogMvcApp.DLL.Interfaces
         void Update(T item);
 
         void Delete(int id);
+
+        DbSet<T> GetDbSet();
     }
 }

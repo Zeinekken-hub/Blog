@@ -1,14 +1,10 @@
-﻿@{
+﻿@model IEnumerable<BlogMvcApp.DLL.Entities.Article>
+
+@{
     ViewBag.Title = "Blog";
 }
 
 <h2 class="text-center">Newest articles</h2>
-<hr/>
-<div class="container">
-    @Helpers.CreateArticle("Depression is thing...", "How to defeat your depression in 30 second?")
-    @Helpers.CreateArticle("Auto oh, is that auto...", "Flying automobiles? Really?!")
-    @Helpers.CreateArticle("Sea is very healthful for your health because...", "Sea is coming! New prices here")
-    @Helpers.CreateArticle("Anger effect on your psychology status, stop it now...", "How to defeat your anger without beating a pillow")
-    @Helpers.CreateArticle("Nowadays, gender is a thing that can be differ...", "More than 100 genders in 2020!")
-    @Helpers.CreateArticle("Mr.President passed the new law about untraditional...", "New LGBT Law! Must to watch!")
-</div>
+<hr />
+
+@Helpers.CreateArticles(Model)

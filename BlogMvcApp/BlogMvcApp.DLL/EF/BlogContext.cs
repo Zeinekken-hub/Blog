@@ -17,6 +17,7 @@ namespace BlogMvcApp.DLL.EF
 
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Article> Articles { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
         static BlogContext()
         {
@@ -35,6 +36,7 @@ namespace BlogMvcApp.DLL.EF
                     Author = "A che?))",
                     Date = DateTime.Now,
                     IsDeleted = false,
+                    GenreId = 1,
                     Title = "Not bad for the first time",
                     Text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
                     "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
@@ -48,6 +50,7 @@ namespace BlogMvcApp.DLL.EF
                     Author = "A)",
                     Date = DateTime.Now,
                     IsDeleted = false,
+                    GenreId = 2,
                     Title = "Not bad for the first time",
                     Text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
                     "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
@@ -61,6 +64,7 @@ namespace BlogMvcApp.DLL.EF
                     Author = "??????????",
                     Date = DateTime.Now,
                     IsDeleted = false,
+                    GenreId = 1,
                     Title = "Not bad for the first time",
                     Text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
                     "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
@@ -71,6 +75,35 @@ namespace BlogMvcApp.DLL.EF
                 }
             };
 
+            var genres = new List<Genre>
+            {
+                new Genre
+                {
+                    Id = 1,
+                    Name = "Travel",
+                    Mood = true
+                },
+                new Genre
+                {
+                    Id = 2,
+                    Name = "Education",
+                    Mood = true
+                },
+                new Genre
+                {
+                    Id = 3,
+                    Name = "Depression",
+                    Mood = false
+                },
+                new Genre
+                {
+                    Id = 4,
+                    Name = "Social",
+                    Mood = false
+                }
+            };
+
+            context.Genres.AddRange(genres);
             context.Articles.AddRange(articles);
             base.Seed(context);
         }

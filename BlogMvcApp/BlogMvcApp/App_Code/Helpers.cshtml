@@ -1,7 +1,7 @@
 ﻿@helper CreateCustomCheckBox(string name, string id, string labelText)
 {
     <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id=@id name=@name value="true"/>
+        <input type="checkbox" class="custom-control-input" id=@id name=@name value="true" />
         <input class="custom-control-input" name=@name id=@id value="false" type="hidden" />
         <label class="custom-control-label" for=@id>@labelText</label>
     </div>
@@ -26,17 +26,33 @@
     </div>
 }
 
-@helper CreateArticle(string text, string header)
+@helper CreateDropDownListGenre(IEnumerable<BlogMvcApp.DLL.Entities.Genre> genres)
 {
-    <div class="card flex-md-row mb-4 box-shadow h-md-250">
-        <div class="card-body d-flex flex-column align-items-start">
-            <h3 class="mb-0">
-                <a class="text-dark" href="#">@header</a>
-            </h3>
-            <div class="mb-1 text-muted">Nov 12</div>
-            <p class="card-text mb-auto">@text</p>
-            <a href="#">Continue reading</a>
-        </div>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        @foreach (var genre in genres)
+        {
+            <a class="dropdown-item" href="/Article/Genre/?genreName=@genre.Name">@genre.Name</a>
+        }
     </div>
+}
 
+@helper CreateArticles(IEnumerable<BlogMvcApp.DLL.Entities.Article> articles)
+{
+    foreach (var article in articles)
+    {
+        if (article.IsDeleted) { continue; }
+        <div class="card flex-md-row m-2 shadow">
+            <div class="card-body d-flex flex-column align-items-start">
+                <h3 class="mb-0">
+                    <a class="text-dark" href="/Article/Display/@article.Id">@article.Title</a>
+                </h3>
+                <div class="mb-1 text-muted">
+                    @article.Date by
+                    <i>@article.Author</i>
+                </div>
+                <p class="card-text mb-auto">@article.Text</p>
+                <a href="/Article/Display/@article.Id">Continue reading</a>
+            </div>
+        </div>
+    }
 }

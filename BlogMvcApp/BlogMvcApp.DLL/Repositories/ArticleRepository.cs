@@ -48,5 +48,10 @@ namespace BlogMvcApp.DLL.Repositories
         {
             _context.Entry(item).State = EntityState.Modified;
         }
+
+        public DbSet<Article> GetDbSet()
+        {
+            return _context.Articles;
+        }
     }
 }

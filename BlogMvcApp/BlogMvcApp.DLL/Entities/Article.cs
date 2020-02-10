@@ -11,6 +11,7 @@ namespace BlogMvcApp.DLL.Entities
         public string Title { get; set; }
         [Required]
         [MinLength(100)]
+        [DataType(DataType.MultilineText)]
         public string Text { get; set; }
         [Required]
         [MinLength(2)]
@@ -18,14 +19,14 @@ namespace BlogMvcApp.DLL.Entities
         [Required]
         public DateTime Date { get; set; }
         public bool IsDeleted { get; set; }
+        [Required]
+        [Display(Name = "Genre of your article")]
+        public int GenreId { get; set; }
+        public virtual Genre Genre { get; set; }
         public virtual ICollection<Feedback> Feedbacks { get; set; }
 
-        //[NotMapped]
-        //CreateDropDownListForTheme
-        //Add Validation to Feedback
-        //Add migration for themes of articles
-        //Create ArticleCreate View
-        //Create choice for article theme onclick dropdown list
-        //Redesign some new features and delete the oldest
+        //Добавлю сейчас 2 плохих жанра и миграцию где будет булевый Mood
+        //После создам объект в Models, который будет содержать анкету
+        //После формы буду получать этот объект и так-же 2 чекбокса и на основе их буду выдавать результаты анкеты
     }
 }

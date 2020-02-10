@@ -1,49 +1,10 @@
-﻿
+﻿@model IEnumerable<BlogMvcApp.DLL.Entities.Article>
+
 @{
     ViewBag.Title = "Result";
 }
 
-<h2 class="mb-2">@ViewBag.LastName @ViewBag.FirstName, Советуем почитать вам эту статью</h2>
-<hr/>
-<div class=" container">
-    @switch (ViewBag.Article.ToString())
-    {
-        case "Depression":
-            <text>
-                @Helpers.CreateArticle("Depression is thing...", "How to defeat your depression in 30 second?")
-            </text>
-            break;
-        case "Auto":
-            <text>
-                @Helpers.CreateArticle("Auto oh, is that auto...", "Flying autosmobiles? Really?!")
-            </text>
-            break;
-        case "Sea":
-            <text>
-                @Helpers.CreateArticle("Sea is very healthful for your health because...", "Sea is coming! New prices here")
-            </text>
-            break;
-        case "Angry":
-            <text>
-                @Helpers.CreateArticle("Anger effect on your psychology status, stop it now...", "How to defeat your angry without beating a pillow")
-            </text>
-            break;
-        case "State":
-            <text>
-                @Helpers.CreateArticle("Nowadays, gender is a thing that can be differ...", "More than 100 genders in 2020!")
-            </text>
-            break;
-        case "Respect":
-            <text>
-                @Helpers.CreateArticle("Mr.President passed the new law about untraditional...", "New LGBT Law! Must to watch!")
-            </text>
-            break;
-        default:
-            <text>
-                <div class="container">
-                    <h2 class="text-muted">No articles for you.</h2>
-                </div>
-            </text>
-            break;
-    }
-</div>
+<h2 class="mb-2">We recommend to read this article(s)</h2>
+<hr />
+
+@Helpers.CreateArticles(Model)
