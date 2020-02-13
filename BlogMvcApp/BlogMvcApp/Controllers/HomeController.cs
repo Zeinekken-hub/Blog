@@ -5,18 +5,18 @@ namespace BlogMvcApp.Controllers
 {
     public class HomeController : Controller
     {
-        private IArticleSerivce ArticleSerivce { get; }
+        private IArticleService ArticleService { get; }
         private IGenreService GenreService { get; }
 
-        public HomeController(IArticleSerivce articleService, IGenreService genreService)
+        public HomeController(IArticleService articleService, IGenreService genreService)
         {
-            ArticleSerivce = articleService;
+            ArticleService = articleService;
             GenreService = genreService;
         }
 
         public ActionResult Index()
         {
-            return View(ArticleSerivce.GetArticles());
+            return View(ArticleService.GetArticles());
         }
 
         public ActionResult DropDownList()

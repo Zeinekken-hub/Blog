@@ -6,27 +6,22 @@ namespace BlogMvcApp.Controllers
 {
     public class ArticleController : Controller
     {
-        private IArticleSerivce ArticleSerivce { get; }
+        private IArticleService ArticleService { get; }
         private IGenreService GenreService { get; }
         private IFeedbackService FeedbackService { get; }
 
-        public ArticleController(IArticleSerivce articleService,
+        public ArticleController(IArticleService articleService,
                                  IFeedbackService feedbackService,
                                  IGenreService genreService)
         {
-            ArticleSerivce = articleService;
+            ArticleService = articleService;
             FeedbackService = feedbackService;
             GenreService = genreService;
         }
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult Display(int id = 1)
         {
-            var article = ArticleSerivce.GetArticleById(id);
+            var article = ArticleService.GetArticleById(id);
             if (article == null) return HttpNotFound();
 
             return View(article);
@@ -52,7 +47,7 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult Create(Article article)
         {
-            ArticleSerivce.Create(article);
+            ArticleService.CreateArticle(article);
 
             return Redirect("/Home/Index");
         }
@@ -74,7 +69,7 @@ namespace BlogMvcApp.Controllers
         {
             if (id == null) return HttpNotFound();
 
-            var article = ArticleSerivce.GetArticleById((int)id);
+            var article = ArticleService.GetArticleById((int)id);
 
             if (article == null) return HttpNotFound();
 
@@ -84,7 +79,7 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult Delete(Article article)
         {
-            ArticleSerivce.Delete(article);
+            ArticleService.DeleteArticle(article);
 
             return Redirect("/Home/Index");
         }
@@ -93,7 +88,7 @@ namespace BlogMvcApp.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null) return HttpNotFound();
-            var article = ArticleSerivce.GetArticleById((int)id);
+            var article = ArticleService.GetArticleById((int)id);
             if (article == null) return HttpNotFound();
 
             var genres = new SelectList(GenreService.GetGenres(), "Id", "Name", article.GenreId);
@@ -105,7 +100,7 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult Edit(Article article)
         {
-            ArticleSerivce.EditArticle(article);
+            ArticleService.EditArticle(article);
 
             return Redirect($"/Article/Display/{article.Id}");
         }

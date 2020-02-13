@@ -17,53 +17,30 @@ namespace BlogMvcApp.DLL.Repositories
             _context = new BlogContext(connection);
         }
 
-        public IRepository<Genre> Genres
-        {
-            get
-            {
-                if (_genreRepository == null)
-                    _genreRepository = new GenreRepository(_context);
-                return _genreRepository;
-            }
-        }
+        public IRepository<Genre> Genres => _genreRepository
+                                            ?? (_genreRepository = new GenreRepository(_context));
 
-        public IRepository<Feedback> Feedbacks
-        {
-            get
-            {
-                if (_feedbackRepository == null)
-                    _feedbackRepository = new FeedbackRepository(_context);
-                return _feedbackRepository;
-            }
-        }
+        public IRepository<Feedback> Feedbacks => _feedbackRepository
+                                                  ?? (_feedbackRepository = new FeedbackRepository(_context));
 
-        public IRepository<Article> Articles
-        {
-            get
-            {
-                if (_articleRepository == null)
-                    _articleRepository = new ArticleRepository(_context);
-                return _articleRepository;
-            }
-        }
+        public IRepository<Article> Articles => _articleRepository 
+                                                ?? (_articleRepository = new ArticleRepository(_context));
 
         public void Save()
         {
             _context.SaveChanges();
         }
 
-        private bool disposed = false;
+        private bool _disposed;
 
         public virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (_disposed) return;
+            if (disposing)
             {
-                if (disposing)
-                {
-                    _context.Dispose();
-                }
-                disposed = true;
+                _context.Dispose();
             }
+            _disposed = true;
         }
 
         public void Dispose()

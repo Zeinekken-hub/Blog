@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BlogMvcApp.BLL.Interfaces
 {
-    public interface IArticleSerivce : IDisposable
+    public interface IArticleService : IDisposable
     {
         IEnumerable<Article> GetArticles();
 
@@ -16,10 +16,10 @@ namespace BlogMvcApp.BLL.Interfaces
 
         IEnumerable<Article> GetArticlesByGenreMood(bool mood);
 
-        void Create(Article article);
+        void CreateArticle(Article article);
 
-        void Delete(Article article);
+        void DeleteArticle(Article article);
 
-        void Delete(int id);
+        void DeleteArticle(int id);
     }
 }

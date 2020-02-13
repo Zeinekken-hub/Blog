@@ -6,14 +6,14 @@ namespace BlogMvcApp.BLL.Infrastructure
 {
     public class ServiceModule : NinjectModule
     {
-        private readonly string connectionString;
+        private readonly string _connectionString;
         public ServiceModule(string connection)
         {
-            connectionString = connection;
+            _connectionString = connection;
         }
         public override void Load()
         {
-            Bind<IUnitOfWork>().To<EFUnitOfWork>().WithConstructorArgument(connectionString);
+            Bind<IUnitOfWork>().To<EFUnitOfWork>().WithConstructorArgument(_connectionString);
         }
     }
 }

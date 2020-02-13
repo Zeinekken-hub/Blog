@@ -15,9 +15,9 @@ namespace BlogMvcApp.BLL.Services
         }
         public Genre GetGenreByName(string name)
         {
-            return Database.Genres.GetAll()
-                                  .Where(genre => genre.Name == name)
-                                  .FirstOrDefault();
+            return Database.Genres
+                .GetAll()
+                .FirstOrDefault(genre => genre.Name == name);
         }
 
         public IEnumerable<Genre> GetGenres()

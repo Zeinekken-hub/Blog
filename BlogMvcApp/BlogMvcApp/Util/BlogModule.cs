@@ -8,7 +8,7 @@ namespace BlogMvcApp.Util
     {
         public override void Load()
         {
-            Bind<IArticleSerivce>().To<ArticleService>();
+            Bind<IArticleService>().To<ArticleService>();
             Bind<IFeedbackService>().To<FeedbackService>();
             //Bind<IProfileService>().To<ProfileService>();
             Bind<IGenreService>().To<GenreService>();

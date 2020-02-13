@@ -5,10 +5,10 @@ namespace BlogMvcApp.Controllers
 {
     public class ProfileController : Controller
     {
-        private IArticleSerivce ArticleSerivce { get; }
-        public ProfileController(IArticleSerivce articleService)
+        private IArticleService ArticleService { get; }
+        public ProfileController(IArticleService articleService)
         {
-            ArticleSerivce = articleService;
+            ArticleService = articleService;
         }
 
         public ActionResult Index()
@@ -19,14 +19,14 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult Result(bool isStable, bool isAlone)
         {
-            var articles = ArticleSerivce.GetArticlesByGenreMood(isStable || isAlone);
+            var articles = ArticleService.GetArticlesByGenreMood(isStable || isAlone);
 
             return View(articles);
         }
 
         protected override void Dispose(bool disposing)
         {
-            ArticleSerivce.Dispose();
+            ArticleService.Dispose();
             base.Dispose(disposing);
         }
     }

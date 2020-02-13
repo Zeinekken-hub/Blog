@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace BlogMvcApp.BLL.Services
 {
-    public class ArticleService : IArticleSerivce
+    public class ArticleService : IArticleService
     {
-        private IUnitOfWork Database { get; set; }
+        private IUnitOfWork Database { get; }
 
         public ArticleService(IUnitOfWork unitOfWork)
         {
@@ -52,19 +52,19 @@ namespace BlogMvcApp.BLL.Services
                 .Where(article => article.Genre.Mood && mood);
         }
 
-        public void Create(Article article)
+        public void CreateArticle(Article article)
         {
             Database.Articles.Create(article);
             Database.Save();
         }
 
-        public void Delete(int id)
+        public void DeleteArticle(int id)
         {
             Database.Articles.Delete(id);
             Database.Save();
         }
 
-        public void Delete(Article article)
+        public void DeleteArticle(Article article)
         {
             Database.Articles.Delete(article.Id);
             Database.Save();

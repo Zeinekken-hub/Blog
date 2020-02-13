@@ -59,7 +59,7 @@
   <ItemGroup>
     <Compile Include="BusinessModels\Profile.cs" />
     <Compile Include="Infrastructure\ServiceModule.cs" />
-    <Compile Include="Interfaces\IArticleSerivce.cs" />
+    <Compile Include="Interfaces\IArticleService.cs" />
     <Compile Include="Interfaces\IFeedbackService.cs" />
     <Compile Include="Interfaces\IGenreService.cs" />
     <Compile Include="Interfaces\IProfileService.cs" />
