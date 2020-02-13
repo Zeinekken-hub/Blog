@@ -1,14 +1,15 @@
-﻿using BlogMvcApp.DLL.Interfaces;
-using BlogMvcApp.DLL.Repositories;
-using System.Data.Entity;
-using System.Linq;
+﻿using BlogMvcApp.BLL.Interfaces;
 using System.Web.Mvc;
 
 namespace BlogMvcApp.Controllers
 {
     public class ProfileController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork = new EFUnitOfWork("BlogContext");
+        private IArticleSerivce ArticleSerivce { get; }
+        public ProfileController(IArticleSerivce articleService)
+        {
+            ArticleSerivce = articleService;
+        }
 
         public ActionResult Index()
         {
@@ -18,21 +19,15 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult Result(bool isStable, bool isAlone)
         {
-            if (isStable || isAlone)
-            {
-                var articles = _unitOfWork.Articles.GetDbSet()
-                    .Include(article => article.Genre)
-                    .Where(article => article.Genre.Mood);
-                return View(articles);
-            }
-            else
-            {
-                var articles = _unitOfWork.Articles.GetDbSet()
-                    .Include(article => article.Genre)
-                    .Where(article => !article.Genre.Mood);
+            var articles = ArticleSerivce.GetArticlesByGenreMood(isStable || isAlone);
 
-                return View(articles);
-            }
+            return View(articles);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            ArticleSerivce.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

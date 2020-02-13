@@ -1,21 +1,27 @@
-﻿using BlogMvcApp.DLL.Interfaces;
-using BlogMvcApp.DLL.Repositories;
+﻿using BlogMvcApp.BLL.Interfaces;
 using System.Web.Mvc;
 
 namespace BlogMvcApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork = new EFUnitOfWork("BlogContext");
+        private IArticleSerivce ArticleSerivce { get; }
+        private IGenreService GenreService { get; }
+
+        public HomeController(IArticleSerivce articleService, IGenreService genreService)
+        {
+            ArticleSerivce = articleService;
+            GenreService = genreService;
+        }
 
         public ActionResult Index()
         {
-            return View(_unitOfWork.Articles.GetAll());
+            return View(ArticleSerivce.GetArticles());
         }
 
         public ActionResult DropDownList()
         {
-            return PartialView(_unitOfWork.Genres.GetAll());
+            return PartialView(GenreService.GetGenres());
         }
     }
 }

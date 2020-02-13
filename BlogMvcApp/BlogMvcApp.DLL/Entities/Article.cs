@@ -25,8 +25,5 @@ namespace BlogMvcApp.DLL.Entities
         public virtual Genre Genre { get; set; }
         public virtual ICollection<Feedback> Feedbacks { get; set; }
 
-        //Добавлю сейчас 2 плохих жанра и миграцию где будет булевый Mood
-        //После создам объект в Models, который будет содержать анкету
-        //После формы буду получать этот объект и так-же 2 чекбокса и на основе их буду выдавать результаты анкеты
     }
 }

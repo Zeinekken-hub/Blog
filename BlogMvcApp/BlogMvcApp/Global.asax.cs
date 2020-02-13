@@ -1,7 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using BlogMvcApp.BLL.Infrastructure;
+using BlogMvcApp.Util;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Mvc;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -16,6 +17,11 @@ namespace BlogMvcApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var blogModule = new BlogModule();
+            var serviceModule = new ServiceModule("BlogContext");
+            var kernel = new StandardKernel(blogModule, serviceModule);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
     }
 }

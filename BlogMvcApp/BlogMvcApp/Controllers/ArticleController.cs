@@ -1,14 +1,23 @@
-﻿using BlogMvcApp.DLL.Entities;
-using BlogMvcApp.DLL.Interfaces;
-using BlogMvcApp.DLL.Repositories;
-using System.Linq;
+﻿using BlogMvcApp.BLL.Interfaces;
+using BlogMvcApp.DLL.Entities;
 using System.Web.Mvc;
 
 namespace BlogMvcApp.Controllers
 {
     public class ArticleController : Controller
     {
-        private readonly IUnitOfWork unitOfWork = new EFUnitOfWork("BlogContext");
+        private IArticleSerivce ArticleSerivce { get; }
+        private IGenreService GenreService { get; }
+        private IFeedbackService FeedbackService { get; }
+
+        public ArticleController(IArticleSerivce articleService,
+                                 IFeedbackService feedbackService,
+                                 IGenreService genreService)
+        {
+            ArticleSerivce = articleService;
+            FeedbackService = feedbackService;
+            GenreService = genreService;
+        }
 
         public ActionResult Index()
         {
@@ -17,7 +26,7 @@ namespace BlogMvcApp.Controllers
 
         public ActionResult Display(int id = 1)
         {
-            var article = unitOfWork.Articles.Get(id);
+            var article = ArticleSerivce.GetArticleById(id);
             if (article == null) return HttpNotFound();
 
             return View(article);
@@ -26,8 +35,7 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult SendFeedback(Feedback feedback)
         {
-            unitOfWork.Feedbacks.Create(feedback);
-            unitOfWork.Save();
+            FeedbackService.SendFeedback(feedback);
 
             return Redirect($"/Article/Display/{feedback.Id}");
         }
@@ -35,7 +43,7 @@ namespace BlogMvcApp.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var genres = new SelectList(unitOfWork.Genres.GetAll(), "Id", "Name");
+            var genres = new SelectList(GenreService.GetGenres(), "Id", "Name");
             ViewBag.Genres = genres;
 
             return View();
@@ -44,8 +52,7 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult Create(Article article)
         {
-            unitOfWork.Articles.Create(article);
-            unitOfWork.Save();
+            ArticleSerivce.Create(article);
 
             return Redirect("/Home/Index");
         }
@@ -53,12 +60,9 @@ namespace BlogMvcApp.Controllers
         [HttpGet]
         public ActionResult Genre(string genreName)
         {
-            var genre = unitOfWork.Genres
-                .GetAll()
-                .FirstOrDefault(g => g.Name == genreName);
+            var genre = GenreService.GetGenreByName(genreName);
 
-            if (genre == null || genre.Articles.Count == 0)
-                return HttpNotFound();
+            if (genre == null) return HttpNotFound();
 
             var articles = genre.Articles;
 
@@ -69,7 +73,9 @@ namespace BlogMvcApp.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null) return HttpNotFound();
-            var article = unitOfWork.Articles.Get((int)id);
+
+            var article = ArticleSerivce.GetArticleById((int)id);
+
             if (article == null) return HttpNotFound();
 
             return View(article);
@@ -78,8 +84,7 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult Delete(Article article)
         {
-            unitOfWork.Articles.Delete(article.Id);
-            unitOfWork.Save();
+            ArticleSerivce.Delete(article);
 
             return Redirect("/Home/Index");
         }
@@ -88,10 +93,10 @@ namespace BlogMvcApp.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null) return HttpNotFound();
-            var article = unitOfWork.Articles.Get((int)id);
+            var article = ArticleSerivce.GetArticleById((int)id);
             if (article == null) return HttpNotFound();
 
-            var genres = new SelectList(unitOfWork.Genres.GetAll(), "Id", "Name", article.GenreId);
+            var genres = new SelectList(GenreService.GetGenres(), "Id", "Name", article.GenreId);
             ViewBag.Genres = genres;
 
             return View(article);
@@ -100,8 +105,7 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult Edit(Article article)
         {
-            unitOfWork.Articles.Update(article);
-            unitOfWork.Save();
+            ArticleSerivce.EditArticle(article);
 
             return Redirect($"/Article/Display/{article.Id}");
         }
