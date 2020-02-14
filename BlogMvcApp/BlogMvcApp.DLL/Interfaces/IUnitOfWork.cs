@@ -8,7 +8,7 @@ namespace BlogMvcApp.DLL.Interfaces
         IRepository<Feedback> Feedbacks { get; }
         IRepository<Article> Articles { get; }
         IRepository<Genre> Genres { get; }
-
+        IRepository<Questionnaire> Questionnaires { get; }
         void Save();
     }
 }

@@ -68,6 +68,7 @@
     <Compile Include="Services\FeedbackService.cs" />
     <Compile Include="Services\GenreService.cs" />
     <Compile Include="Services\MainService.cs" />
+    <Compile Include="Services\ProfileService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,7 +1,9 @@
-﻿namespace BlogMvcApp.BLL.Interfaces
+﻿using BlogMvcApp.DLL.Entities;
+
+namespace BlogMvcApp.BLL.Interfaces
 {
     public interface IProfileService
     {
-        void SendProfile();
+        void SendProfile(Questionnaire questionnaire);
     }
 }

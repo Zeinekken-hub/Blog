@@ -11,6 +11,7 @@ namespace BlogMvcApp.DLL.Repositories
         private ArticleRepository _articleRepository;
         private FeedbackRepository _feedbackRepository;
         private GenreRepository _genreRepository;
+        private QuestionnaireRepository _questionnaireRepository;
 
         public EFUnitOfWork(string connection)
         {
@@ -23,8 +24,12 @@ namespace BlogMvcApp.DLL.Repositories
         public IRepository<Feedback> Feedbacks => _feedbackRepository
                                                   ?? (_feedbackRepository = new FeedbackRepository(_context));
 
-        public IRepository<Article> Articles => _articleRepository 
+        public IRepository<Article> Articles => _articleRepository
                                                 ?? (_articleRepository = new ArticleRepository(_context));
+
+        public IRepository<Questionnaire> Questionnaires => _questionnaireRepository
+                                                            ?? (_questionnaireRepository =
+                                                                new QuestionnaireRepository(_context));
 
         public void Save()
         {

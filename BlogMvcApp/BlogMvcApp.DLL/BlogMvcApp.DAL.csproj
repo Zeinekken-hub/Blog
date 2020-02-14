@@ -55,18 +55,36 @@
     <Compile Include="Entities\Article.cs" />
     <Compile Include="Entities\Feedback.cs" />
     <Compile Include="Entities\Genre.cs" />
-    <Compile Include="Entities\Questionary.cs" />
+    <Compile Include="Entities\Questionnaire.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Migrations\202002141528039_init.cs" />
+    <Compile Include="Migrations\202002141528039_init.designer.cs">
+      <DependentUpon>202002141528039_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002141547477_QustionnaireLanguage.cs" />
+    <Compile Include="Migrations\202002141547477_QustionnaireLanguage.designer.cs">
+      <DependentUpon>202002141547477_QustionnaireLanguage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ArticleRepository.cs" />
     <Compile Include="Repositories\EFUnitOfWork.cs" />
     <Compile Include="Repositories\FeedbackRepository.cs" />
     <Compile Include="Repositories\GenreRepository.cs" />
+    <Compile Include="Repositories\QuestionnaireRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202002141528039_init.resx">
+      <DependentUpon>202002141528039_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002141547477_QustionnaireLanguage.resx">
+      <DependentUpon>202002141547477_QustionnaireLanguage.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

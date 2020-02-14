@@ -1,4 +1,5 @@
 ﻿using BlogMvcApp.BLL.Interfaces;
+using BlogMvcApp.DLL.Entities;
 using System.Web.Mvc;
 
 namespace BlogMvcApp.Controllers
@@ -6,8 +7,11 @@ namespace BlogMvcApp.Controllers
     public class ProfileController : Controller
     {
         private IArticleService ArticleService { get; }
-        public ProfileController(IArticleService articleService)
+        private IProfileService ProfileService { get; }
+        public ProfileController(IArticleService articleService,
+            IProfileService profileService)
         {
+            ProfileService = profileService;
             ArticleService = articleService;
         }
 
@@ -17,9 +21,12 @@ namespace BlogMvcApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Result(bool isStable, bool isAlone)
+        public ActionResult Result(Questionnaire questionnaire)
         {
-            var articles = ArticleService.GetArticlesByGenreMood(isStable || isAlone);
+            ProfileService.SendProfile(questionnaire);
+
+            var articles = ArticleService.GetArticlesByGenreMood(questionnaire);
+
 
             return View(articles);
         }

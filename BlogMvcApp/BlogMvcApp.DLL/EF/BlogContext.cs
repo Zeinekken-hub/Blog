@@ -18,6 +18,7 @@ namespace BlogMvcApp.DLL.EF
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Questionnaire> Questionnaires { get; set; }
 
         static BlogContext()
         {
@@ -103,6 +104,18 @@ namespace BlogMvcApp.DLL.EF
                 }
             };
 
+            var q = new Questionnaire
+            {
+                IsAlone = true,
+                IsStable = false,
+                Gender = "Male",
+                Id = 1,
+                FirstName = "Boh",
+                LastName = "Mu"
+            };
+
+
+            context.Questionnaires.Add(q);
             context.Genres.AddRange(genres);
             context.Articles.AddRange(articles);
             base.Seed(context);

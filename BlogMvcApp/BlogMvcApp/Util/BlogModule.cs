@@ -10,7 +10,7 @@ namespace BlogMvcApp.Util
         {
             Bind<IArticleService>().To<ArticleService>();
             Bind<IFeedbackService>().To<FeedbackService>();
-            //Bind<IProfileService>().To<ProfileService>();
+            Bind<IProfileService>().To<ProfileService>();
             Bind<IGenreService>().To<GenreService>();
         }
     }

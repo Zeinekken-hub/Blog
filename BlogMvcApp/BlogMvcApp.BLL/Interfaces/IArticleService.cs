@@ -14,7 +14,7 @@ namespace BlogMvcApp.BLL.Interfaces
 
         void EditArticle(Article article);
 
-        IEnumerable<Article> GetArticlesByGenreMood(bool mood);
+        IEnumerable<Article> GetArticlesByGenreMood(Questionnaire questionnaire);
 
         void CreateArticle(Article article);
 

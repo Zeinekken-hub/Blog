@@ -1,4 +1,6 @@
-﻿@{
+﻿@model BlogMvcApp.DLL.Entities.Questionnaire
+
+@{
     ViewBag.Title = "Questionnaire";
 }
 
@@ -10,27 +12,27 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <h6>First name</h6>
-                @Html.TextBox("firstName", null, new { @class = "form-control" })
+                @Html.TextBox("FirstName", null, new { @class = "form-control" })
             </div>
             <div class="form-group col-md-6">
                 <h6>Last name</h6>
-                @Html.TextBox("lastName", null, new { @class = "form-control" })
+                @Html.TextBox("LastName", null, new { @class = "form-control" })
             </div>
             <div class="w-100"></div>
             <div class="form-group container">
                 <h6>Gender</h6>
-                @Helpers.CreateCustomRadioButton("gender", "r1", "male", "Male")
-                @Helpers.CreateCustomRadioButton("gender", "r2", "female", "Female")
-                @Helpers.CreateCustomRadioButton("gender", "r3", "custom", "Other")
+                @Helpers.CreateCustomRadioButton("Gender", "r1", "male", "Male")
+                @Helpers.CreateCustomRadioButton("Gender", "r2", "female", "Female")
+                @Helpers.CreateCustomRadioButton("Gender", "r3", "custom", "Other")
             </div>
             <div class="form-group container">
                 <h6>Mood</h6>
-                @Helpers.CreateCustomCheckBox("isAlone", "c1", "You feel lonely")
-                @Helpers.CreateCustomCheckBox("isStable", "c2", "You feel angry")
+                @Helpers.CreateCustomCheckBox("IsAlone", "c1", "You feel lonely")
+                @Helpers.CreateCustomCheckBox("IsStable", "c2", "You feel angry")
             </div>
             <div class="form-group container">
                 <h6>Language</h6>
-                @Helpers.CreateSelect("language", new List<string> { "English", "Русский" })
+                @Helpers.CreateSelect("Language", new List<string> { "English", "Русский" })
             </div>
         </div>
         <input type="submit" value="Submit" class="btn btn-primary" />

@@ -31,7 +31,10 @@ namespace BlogMvcApp.DLL.Repositories
 
         public IEnumerable<Article> Find(Func<Article, bool> predicate)
         {
-            return _context.Articles.Include(a => a.Feedbacks).Where(predicate).ToList();
+            return _context.Articles.Include(a => a.Feedbacks)
+                .AsEnumerable()
+                .Where(predicate)
+                .ToList();
         }
 
         public Article Get(int id)
