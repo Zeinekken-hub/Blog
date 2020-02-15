@@ -13,9 +13,9 @@ namespace BlogMvcApp.DLL.Repositories
         private GenreRepository _genreRepository;
         private QuestionnaireRepository _questionnaireRepository;
 
-        public EFUnitOfWork(string connection)
+        public EFUnitOfWork()
         {
-            _context = new BlogContext(connection);
+            _context = new BlogContext();
         }
 
         public IRepository<Genre> Genres => _genreRepository

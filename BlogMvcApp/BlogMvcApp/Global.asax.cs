@@ -19,7 +19,7 @@ namespace BlogMvcApp
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             var blogModule = new BlogModule();
-            var serviceModule = new ServiceModule("BlogContext");
+            var serviceModule = new ServiceModule();
             var kernel = new StandardKernel(blogModule, serviceModule);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }

@@ -1,4 +1,5 @@
-﻿using BlogMvcApp.BLL.Interfaces;
+﻿using System;
+using BlogMvcApp.BLL.Interfaces;
 using BlogMvcApp.DLL.Entities;
 using BlogMvcApp.DLL.Interfaces;
 using System.Collections.Generic;
@@ -23,8 +24,10 @@ namespace BlogMvcApp.BLL.Services
 
         public Article GetArticleById(int id)
         {
-            var article = Database.Articles.Get(id);
-
+            var article = Database.Articles.GetDbSet()
+                .Include(a => a.Tags)
+                .FirstOrDefault(a => a.Id == id);
+            
             return article;
         }
 

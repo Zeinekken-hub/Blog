@@ -56,15 +56,16 @@
     <Compile Include="Entities\Feedback.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Questionnaire.cs" />
+    <Compile Include="Entities\Tag.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Migrations\202002141528039_init.cs" />
-    <Compile Include="Migrations\202002141528039_init.designer.cs">
-      <DependentUpon>202002141528039_init.cs</DependentUpon>
+    <Compile Include="Migrations\202002151058197_InitialCreate.cs" />
+    <Compile Include="Migrations\202002151058197_InitialCreate.designer.cs">
+      <DependentUpon>202002151058197_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202002141547477_QustionnaireLanguage.cs" />
-    <Compile Include="Migrations\202002141547477_QustionnaireLanguage.designer.cs">
-      <DependentUpon>202002141547477_QustionnaireLanguage.cs</DependentUpon>
+    <Compile Include="Migrations\202002151119054_AddingTagColor.cs" />
+    <Compile Include="Migrations\202002151119054_AddingTagColor.designer.cs">
+      <DependentUpon>202002151119054_AddingTagColor.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,11 +80,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202002141528039_init.resx">
-      <DependentUpon>202002141528039_init.cs</DependentUpon>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202002151058197_InitialCreate.resx">
+      <DependentUpon>202002151058197_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002141547477_QustionnaireLanguage.resx">
-      <DependentUpon>202002141547477_QustionnaireLanguage.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202002151119054_AddingTagColor.resx">
+      <DependentUpon>202002151119054_AddingTagColor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

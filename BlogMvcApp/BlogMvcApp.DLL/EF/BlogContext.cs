@@ -19,10 +19,18 @@ namespace BlogMvcApp.DLL.EF
         public DbSet<Article> Articles { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Questionnaire> Questionnaires { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         static BlogContext()
         {
             Database.SetInitializer(new BlogInitializer());
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Article>().HasMany(a => a.Tags).WithMany(a => a.Articles);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 
@@ -44,7 +52,8 @@ namespace BlogMvcApp.DLL.EF
                     "when an unknown printer took a galley of type and scrambled it to make a type specimen book. " +
                     "It has survived not only five centuries, but also the leap into electronic typesetting, " +
                     "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, " +
-                    "and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                    "and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+
                 },
                 new Article
                 {
@@ -58,7 +67,7 @@ namespace BlogMvcApp.DLL.EF
                     "when an unknown printer took a galley of type and scrambled it to make a type specimen book. " +
                     "It has survived not only five centuries, but also the leap into electronic typesetting, " +
                     "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, " +
-                    "and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                    "and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                 },
                 new Article
                 {
@@ -72,7 +81,8 @@ namespace BlogMvcApp.DLL.EF
                     "when an unknown printer took a galley of type and scrambled it to make a type specimen book. " +
                     "It has survived not only five centuries, but also the leap into electronic typesetting, " +
                     "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, " +
-                    "and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                    "and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+
                 }
             };
 
@@ -114,6 +124,13 @@ namespace BlogMvcApp.DLL.EF
                 LastName = "Mu"
             };
 
+            context.Tags.AddRange(new List<Tag>
+            {
+                new Tag {Id = 1, Name = "Social"},
+                new Tag {Id = 2, Name = "Life"},
+                new Tag {Id = 3, Name = "Education"},
+                new Tag {Id = 4, Name = "Motivation"}
+            });
 
             context.Questionnaires.Add(q);
             context.Genres.AddRange(genres);
