@@ -43,5 +43,17 @@ namespace BlogMvcApp.Infrastructure.Mapper
                 .CreateMapper()
                 .Map<Article, ArticleViewModel>(article);
         }
+
+        public static IEnumerable<ArticleViewModel> ToArticleVm(this IEnumerable<Article> articles)
+        {
+            return new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Article, ArticleViewModel>()
+                        .ForMember("Feedbacks", opt => opt.MapFrom(item => item.Feedbacks.ToFeedbackVm()))
+                        .ForMember("Tags", opt => opt.MapFrom(item => item.Tags.ToTagVm()));
+                })
+                .CreateMapper()
+                .Map<IEnumerable<Article>, IEnumerable<ArticleViewModel>>(articles);
+        }
     }
 }

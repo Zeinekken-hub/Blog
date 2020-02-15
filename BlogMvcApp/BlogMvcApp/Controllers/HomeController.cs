@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using BlogMvcApp.BLL.Interfaces;
+﻿using BlogMvcApp.BLL.Interfaces;
 using BlogMvcApp.Infrastructure.Mapper;
-using Ninject.Infrastructure.Language;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace BlogMvcApp.Controllers
@@ -28,10 +27,31 @@ namespace BlogMvcApp.Controllers
             return PartialView(ArticleService.GetArticleTags().ToTagVm());
         }
 
-        //public ActionResult Voting()
-        //{
-        //    return PartialView();
-        //}
+
+        [HttpPost]
+        public ActionResult Vote(string mood)
+        {
+            return PartialView("ThankResult");
+        }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ArticleSearch(string name)
+        {
+            var allbooks = ArticleService.GetArticles()
+                .ToList()
+                .ToArticleVm()
+                .Where(a => a.Title.Contains(name))
+                .ToList();
+            if (allbooks.Count <= 0)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(allbooks);
+        }
 
         protected override void Dispose(bool disposing)
         {

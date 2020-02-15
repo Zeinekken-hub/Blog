@@ -1,0 +1,10 @@
+﻿@model IEnumerable<BlogMvcApp.Models.ArticleViewModel>
+ 
+<div id="searchresults">
+    <ul>
+        @foreach (var item in Model)
+        { 
+            <li>@item.Title</li>
+        }
+    </ul>
+</div>

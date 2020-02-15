@@ -25,6 +25,9 @@ namespace BlogMvcApp
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/font-awesome.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryajax").Include(
+                "~/Scripts/jquery.unobtrusive-ajax.js"));
         }
     }
 }

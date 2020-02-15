@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using BlogMvcApp.BLL.Interfaces;
 using BlogMvcApp.DLL.Entities;
@@ -46,8 +47,10 @@ namespace BlogMvcApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Article article)
+        public ActionResult Create(Article article, ICollection<Tag> tags)
         {
+            article.Tags = tags;
+
             ArticleService.CreateArticle(article);
 
             return Redirect("/Home/Index");

@@ -8,3 +8,22 @@
 <hr />
 
 @Helpers.CreateArticles(Model)
+
+@section Voting
+{
+    <h5>Voting</h5>
+
+    <p class="font-weight-bold">How are you today?</p>
+    <div id="voting">
+        @using (Ajax.BeginForm("Vote", new AjaxOptions { UpdateTargetId = "voting" }))
+        {
+            <div class="form-group">
+                @Helpers.CreateCustomRadioButton("mood", "r1", "happy", "Happy")
+                @Helpers.CreateCustomRadioButton("mood", "r2", "normal", "Normal")
+                @Helpers.CreateCustomRadioButton("mood", "r3", "bad", "Bad")
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Submit" />
+        }
+    </div>
+}

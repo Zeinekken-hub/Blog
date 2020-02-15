@@ -42,7 +42,10 @@
                 @RenderBody()
             </div>
             <div class="col-lg-2 col-sm-2">
-                @Html.Action("Tags", "Home")
+                <div class="flex-column">
+                    @Html.Action("Tags", "Home")
+                    @RenderSection("Voting", false)
+                </div>
             </div>
             <div class="col-lg-1 col-sm-1"></div>
         </div>
@@ -55,9 +58,9 @@
         </div>
     </footer>
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryajax")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
-
     <script>
         $(document).ready(function () {
 
