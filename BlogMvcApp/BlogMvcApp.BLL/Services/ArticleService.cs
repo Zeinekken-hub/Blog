@@ -26,6 +26,7 @@ namespace BlogMvcApp.BLL.Services
         {
             var article = Database.Articles.GetDbSet()
                 .Include(a => a.Tags)
+                .Include(p => p.Feedbacks)
                 .FirstOrDefault(a => a.Id == id);
             
             return article;

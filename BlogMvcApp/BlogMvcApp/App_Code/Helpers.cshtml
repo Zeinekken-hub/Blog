@@ -61,13 +61,13 @@
     }
 }
 
-@helper CreateTags(IEnumerable<Tag> tags)
+@helper CreateTags(IEnumerable<TagViewModel> tags)
 {
     <div class="card-group">
         @foreach (var tag in tags)
         {
-            <div class="rounded shadow-sm p-3 m-2" style="color:@tag.Color">
-                <h6>@tag.Name</h6>
+            <div class="rounded shadow-sm p-2 m-2" style="background-color:@tag.Color">
+                <h6 class="text-light">@tag.Name</h6>
             </div>
 
         }

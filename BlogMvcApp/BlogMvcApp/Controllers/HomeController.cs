@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
+﻿using System.Linq;
 using BlogMvcApp.BLL.Interfaces;
+using BlogMvcApp.Infrastructure.Mapper;
+using Ninject.Infrastructure.Language;
 using System.Web.Mvc;
-using BlogMvcApp.DLL.Entities;
-using BlogMvcApp.Models;
 
 namespace BlogMvcApp.Controllers
 {
@@ -23,18 +20,9 @@ namespace BlogMvcApp.Controllers
 
         public ActionResult Index()
         {
-            var cfg = new MapperConfiguration(c =>
-            {
-                c.CreateMap<Article, ArticleAdViewModel>()
-                    .ForMember("Text", opt => opt.MapFrom(item => item.Text.Substring(0, TextAdLength)))
-                    .ForMember("CommentCount", opt => opt.MapFrom(item => item.Feedbacks.Count));
-            });
-
-            var mapper = cfg.CreateMapper();
             var articles = ArticleService.GetArticles().ToList();
-            var articlesAd = mapper.Map<IEnumerable<Article>, IEnumerable<ArticleAdViewModel>>(articles);
 
-            return View(articlesAd);
+            return View(articles.ToArticleAdVm(500));
         }
 
         public ActionResult DropDownList()

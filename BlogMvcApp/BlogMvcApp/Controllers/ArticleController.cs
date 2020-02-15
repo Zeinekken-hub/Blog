@@ -1,6 +1,10 @@
-﻿using BlogMvcApp.BLL.Interfaces;
+﻿using System.Collections.Generic;
+using BlogMvcApp.BLL.Interfaces;
 using BlogMvcApp.DLL.Entities;
 using System.Web.Mvc;
+using AutoMapper;
+using BlogMvcApp.Infrastructure.Mapper;
+using BlogMvcApp.Models;
 
 namespace BlogMvcApp.Controllers
 {
@@ -22,9 +26,9 @@ namespace BlogMvcApp.Controllers
         public ActionResult Display(int id = 1)
         {
             var article = ArticleService.GetArticleById(id);
-            if (article == null) return HttpNotFound();
+            if (article == null) return HttpNotFound(); ;
 
-            return View(article);
+            return View(article.ToArticleVm());
         }
 
         [HttpPost]

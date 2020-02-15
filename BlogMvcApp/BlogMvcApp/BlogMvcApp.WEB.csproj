@@ -152,7 +152,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Mapper\ArticleMapper.cs" />
+    <Compile Include="Infrastructure\Mapper\FeedbackMapper.cs" />
+    <Compile Include="Infrastructure\Mapper\TagMapper.cs" />
     <Compile Include="Models\ArticleAdViewModel.cs" />
+    <Compile Include="Models\ArticleViewModel.cs" />
+    <Compile Include="Models\FeedbackViewModel.cs" />
+    <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\BlogModule.cs" />
   </ItemGroup>
