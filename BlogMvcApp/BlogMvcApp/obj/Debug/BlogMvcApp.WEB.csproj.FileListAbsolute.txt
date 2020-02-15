@@ -102,3 +102,6 @@ C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp\obj\Debug\BlogMvcApp.dll
 C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp\obj\Debug\BlogMvcApp.pdb
 C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp\bin\WebActivatorEx.dll
 C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp\bin\BlogMvcApp.BLL.dll.config
+C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp\bin\AutoMapper.dll
+C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp\bin\AutoMapper.pdb
+C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp\bin\AutoMapper.xml

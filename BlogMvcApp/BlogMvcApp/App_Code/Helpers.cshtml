@@ -1,4 +1,5 @@
-﻿@helper CreateCustomCheckBox(string name, string id, string labelText)
+﻿@using BlogMvcApp.Models
+@helper CreateCustomCheckBox(string name, string id, string labelText)
 {
     <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" id=@id name=@name value="true" />
@@ -36,11 +37,10 @@
     </div>
 }
 
-@helper CreateArticles(IEnumerable<BlogMvcApp.DLL.Entities.Article> articles)
+@helper CreateArticles(IEnumerable<ArticleAdViewModel> articles)
 {
     foreach (var article in articles)
     {
-        if (article.IsDeleted) { continue; }
         <div class="card flex-md-row m-2 shadow">
             <div class="card-body d-flex flex-column align-items-start">
                 <h3 class="mb-0">
@@ -50,8 +50,11 @@
                     @article.Date by
                     <i>@article.Author</i>
                 </div>
-                <p class="card-text mb-auto">@article.Text</p>
-                <a href="/Article/Display/@article.Id">Continue reading</a>
+                <p class="card-text mb-auto">@article.Text...</p>
+                <div class="container">
+                    <a href="/Article/Display/@article.Id" class="float-left">Continue reading</a>
+                    <h6 class="text-muted float-right">@article.CommentCount Comments.</h6>
+                </div>
             </div>
         </div>
     }

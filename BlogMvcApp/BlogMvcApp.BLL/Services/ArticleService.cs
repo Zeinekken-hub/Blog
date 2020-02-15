@@ -30,7 +30,7 @@ namespace BlogMvcApp.BLL.Services
 
         public IEnumerable<Article> GetArticles()
         {
-            return Database.Articles.GetAll();
+            return Database.Articles.GetAll().Where(article => !article.IsDeleted);
         }
 
         public IEnumerable<Article> GetArticlesByGenre(Genre genre)
