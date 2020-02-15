@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Diagnostics;
+using System.Linq;
 using BlogMvcApp.BLL.Interfaces;
 using BlogMvcApp.DLL.Entities;
-using System.Web.Mvc;
-using AutoMapper;
 using BlogMvcApp.Infrastructure.Mapper;
+using System.Web.Mvc;
 using BlogMvcApp.Models;
 
 namespace BlogMvcApp.Controllers
@@ -11,22 +11,19 @@ namespace BlogMvcApp.Controllers
     public class ArticleController : Controller
     {
         private IArticleService ArticleService { get; }
-        private IGenreService GenreService { get; }
         private IFeedbackService FeedbackService { get; }
 
         public ArticleController(IArticleService articleService,
-                                 IFeedbackService feedbackService,
-                                 IGenreService genreService)
+                                 IFeedbackService feedbackService)
         {
             ArticleService = articleService;
             FeedbackService = feedbackService;
-            GenreService = genreService;
         }
 
         public ActionResult Display(int id = 1)
         {
             var article = ArticleService.GetArticleById(id);
-            if (article == null) return HttpNotFound(); ;
+            if (article == null) return HttpNotFound(); 
 
             return View(article.ToArticleVm());
         }
@@ -42,8 +39,8 @@ namespace BlogMvcApp.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var genres = new SelectList(GenreService.GetGenres(), "Id", "Name");
-            ViewBag.Genres = genres;
+            var tags = new SelectList(ArticleService.GetArticleTags(), "Id", "Name");
+            ViewBag.Tags = tags;
 
             return View();
         }
@@ -57,15 +54,18 @@ namespace BlogMvcApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult Genre(string genreName)
+        public ActionResult Tag(string tagName)
         {
-            var genre = GenreService.GetGenreByName(genreName);
+            var articles = ArticleService.GetArticlesByTagName(tagName).ToList();
+            var tag = ArticleService.GetTagByName(tagName);
 
-            if (genre == null) return HttpNotFound();
-
-            var articles = genre.Articles;
-
-            return View(articles);
+            var objToView = new ArticleTagViewModel
+            {
+                Tag = tag.ToTagVm(),
+                Articles = articles.ToArticleAdVm(500)
+            };
+             
+            return View(objToView);
         }
 
         [HttpGet]
@@ -95,7 +95,7 @@ namespace BlogMvcApp.Controllers
             var article = ArticleService.GetArticleById((int)id);
             if (article == null) return HttpNotFound();
 
-            var genres = new SelectList(GenreService.GetGenres(), "Id", "Name", article.GenreId);
+            var genres = new SelectList(ArticleService.GetArticleTags(), "Id", "Name");
             ViewBag.Genres = genres;
 
             return View(article);

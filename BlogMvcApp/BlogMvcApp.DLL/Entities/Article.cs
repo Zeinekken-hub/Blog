@@ -21,8 +21,6 @@ namespace BlogMvcApp.DLL.Entities
         public bool IsDeleted { get; set; }
         [Required]
         [Display(Name = "Genre of your article")]
-        public int GenreId { get; set; }
-        public virtual Genre Genre { get; set; }
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
 

@@ -37,10 +37,17 @@ namespace BlogMvcApp.BLL.Services
             return Database.Articles.GetAll().Where(article => !article.IsDeleted);
         }
 
-        public IEnumerable<Article> GetArticlesByGenre(Genre genre)
+        public IEnumerable<Article> GetArticlesByTagName(string tagName)
         {
-            return Database.Articles.GetAll()
-                .Where(article => article.Genre.Name == genre.Name);
+            if (tagName == "All") 
+                return Database.Articles.GetAll().ToList();
+            else
+            {
+                return Database.Articles.GetDbSet()
+                    .Include(article => article.Tags)
+                    .Where(article => article.Tags.Any(tag => tag.Name == tagName))
+                    .ToList();
+            }
         }
 
         public void EditArticle(Article article)
@@ -51,9 +58,9 @@ namespace BlogMvcApp.BLL.Services
 
         public IEnumerable<Article> GetArticlesByGenreMood(Questionnaire q)
         {
-            return Database.Articles.GetDbSet()
-                .Include(article => article.Genre)
-                .Where(article => article.Genre.Mood && q.IsAlone || q.IsStable);
+            return Database.Articles.GetDbSet();
+            //.Include(article => article.Genre)
+            //.Where(article => article.Genre.Mood && q.IsAlone || q.IsStable);
         }
 
         public void CreateArticle(Article article)
@@ -72,6 +79,16 @@ namespace BlogMvcApp.BLL.Services
         {
             Database.Articles.Delete(article.Id);
             Database.Save();
+        }
+
+        public DbSet<Tag> GetArticleTags()
+        {
+            return Database.Tags.GetDbSet();
+        }
+
+        public Tag GetTagByName(string tagName)
+        {
+            return Database.Tags.GetAll().FirstOrDefault(tag => tag.Name == tagName);
         }
     }
 }

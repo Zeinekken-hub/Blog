@@ -10,25 +10,28 @@ namespace BlogMvcApp.Controllers
     {
         private const int TextAdLength = 500;
         private IArticleService ArticleService { get; }
-        private IGenreService GenreService { get; }
 
-        public HomeController(IArticleService articleService, IGenreService genreService)
+        public HomeController(IArticleService articleService)
         {
             ArticleService = articleService;
-            GenreService = genreService;
         }
 
         public ActionResult Index()
         {
             var articles = ArticleService.GetArticles().ToList();
 
-            return View(articles.ToArticleAdVm(500));
+            return View(articles.ToArticleAdVm(TextAdLength));
         }
 
-        public ActionResult DropDownList()
+        public ActionResult Tags()
         {
-            return PartialView(GenreService.GetGenres());
+            return PartialView(ArticleService.GetArticleTags().ToTagVm());
         }
+
+        //public ActionResult Voting()
+        //{
+        //    return PartialView();
+        //}
 
         protected override void Dispose(bool disposing)
         {

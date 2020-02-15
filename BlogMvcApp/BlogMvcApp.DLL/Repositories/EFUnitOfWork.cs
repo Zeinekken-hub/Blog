@@ -10,16 +10,12 @@ namespace BlogMvcApp.DLL.Repositories
         private readonly BlogContext _context;
         private ArticleRepository _articleRepository;
         private FeedbackRepository _feedbackRepository;
-        private GenreRepository _genreRepository;
         private QuestionnaireRepository _questionnaireRepository;
-
+        private TagRepository _tagRepository;
         public EFUnitOfWork()
         {
             _context = new BlogContext();
         }
-
-        public IRepository<Genre> Genres => _genreRepository
-                                            ?? (_genreRepository = new GenreRepository(_context));
 
         public IRepository<Feedback> Feedbacks => _feedbackRepository
                                                   ?? (_feedbackRepository = new FeedbackRepository(_context));
@@ -30,6 +26,8 @@ namespace BlogMvcApp.DLL.Repositories
         public IRepository<Questionnaire> Questionnaires => _questionnaireRepository
                                                             ?? (_questionnaireRepository =
                                                                 new QuestionnaireRepository(_context));
+        public IRepository<Tag> Tags => _tagRepository
+                                        ?? (_tagRepository = new TagRepository(_context));
 
         public void Save()
         {

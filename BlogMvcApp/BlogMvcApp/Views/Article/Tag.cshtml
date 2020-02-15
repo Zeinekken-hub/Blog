@@ -1,0 +1,10 @@
+﻿@model BlogMvcApp.Models.ArticleTagViewModel
+
+@{
+    ViewBag.Title = "Genre";
+}
+
+<h2 class="text-center">All articles with Tag: "@(Model.Tag.Name)"</h2>
+<hr />
+
+@Helpers.CreateArticles(Model.Articles)

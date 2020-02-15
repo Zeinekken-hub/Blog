@@ -12,3 +12,4 @@ C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp.DLL\obj\Debug\BlogMvcApp.DLL.p
 C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp.DLL\obj\Debug\BlogMvcApp.DLL.Migrations.InitialCreate.resources
 C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp.DLL\obj\Debug\BlogMvcApp.DAL.csproj.GenerateResource.cache
 C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp.DLL\obj\Debug\BlogMvcApp.DLL.Migrations.AddingTagColor.resources
+C:\Users\Omen\Desktop\Blog2\BlogMvcApp\BlogMvcApp.DLL\obj\Debug\BlogMvcApp.DLL.Migrations.DeleteGenre.resources

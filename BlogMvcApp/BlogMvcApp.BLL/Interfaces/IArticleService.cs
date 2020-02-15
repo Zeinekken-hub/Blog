@@ -1,6 +1,7 @@
 ﻿using BlogMvcApp.DLL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace BlogMvcApp.BLL.Interfaces
 {
@@ -8,7 +9,8 @@ namespace BlogMvcApp.BLL.Interfaces
     {
         IEnumerable<Article> GetArticles();
 
-        IEnumerable<Article> GetArticlesByGenre(Genre genre);
+        IEnumerable<Article> GetArticlesByTagName(string tagName);
+        DbSet<Tag> GetArticleTags();
 
         Article GetArticleById(int id);
 
@@ -21,5 +23,6 @@ namespace BlogMvcApp.BLL.Interfaces
         void DeleteArticle(Article article);
 
         void DeleteArticle(int id);
+        Tag GetTagByName(string tagName);
     }
 }

@@ -54,7 +54,6 @@
     <Compile Include="EF\BlogContext.cs" />
     <Compile Include="Entities\Article.cs" />
     <Compile Include="Entities\Feedback.cs" />
-    <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Questionnaire.cs" />
     <Compile Include="Entities\Tag.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
@@ -67,13 +66,17 @@
     <Compile Include="Migrations\202002151119054_AddingTagColor.designer.cs">
       <DependentUpon>202002151119054_AddingTagColor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002151647598_DeleteGenre.cs" />
+    <Compile Include="Migrations\202002151647598_DeleteGenre.designer.cs">
+      <DependentUpon>202002151647598_DeleteGenre.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ArticleRepository.cs" />
     <Compile Include="Repositories\EFUnitOfWork.cs" />
     <Compile Include="Repositories\FeedbackRepository.cs" />
-    <Compile Include="Repositories\GenreRepository.cs" />
     <Compile Include="Repositories\QuestionnaireRepository.cs" />
+    <Compile Include="Repositories\TagRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -88,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002151119054_AddingTagColor.resx">
       <DependentUpon>202002151119054_AddingTagColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002151647598_DeleteGenre.resx">
+      <DependentUpon>202002151647598_DeleteGenre.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

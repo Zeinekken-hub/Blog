@@ -156,6 +156,7 @@
     <Compile Include="Infrastructure\Mapper\FeedbackMapper.cs" />
     <Compile Include="Infrastructure\Mapper\TagMapper.cs" />
     <Compile Include="Models\ArticleAdViewModel.cs" />
+    <Compile Include="Models\ArticleTagViewModel.cs" />
     <Compile Include="Models\ArticleViewModel.cs" />
     <Compile Include="Models\FeedbackViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
@@ -305,7 +306,7 @@
     <Content Include="Views\Article\SendFeedback.cshtml" />
     <Content Include="Views\Article\Create.cshtml" />
     <Content Include="Views\Shared\DropDownList.cshtml" />
-    <Content Include="Views\Article\Genre.cshtml" />
+    <Content Include="Views\Article\Tag.cshtml" />
     <Content Include="Views\Article\Delete.cshtml" />
     <Content Include="Views\Article\Edit.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -318,6 +319,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Shared\Tags.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
