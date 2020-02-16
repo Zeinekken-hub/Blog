@@ -66,6 +66,9 @@ namespace BlogMvcApp.BLL.Services
         public void CreateArticle(Article article)
         {
             Database.Articles.Create(article);
+
+
+
             Database.Save();
         }
 

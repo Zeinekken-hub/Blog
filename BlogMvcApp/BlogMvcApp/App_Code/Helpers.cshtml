@@ -65,11 +65,19 @@
     <div class="card-group">
         @foreach (var tag in tags)
         {
-            <a class="rounded shadow-sm p-2 m-2 text-decoration-none" 
+            <a class="rounded shadow-sm p-2 m-2 text-decoration-none"
                style="background-color:@tag.Color" href="/Article/Tag?tagName=@tag.Name">
                 <h6 class="text-light">@tag.Name</h6>
             </a>
 
         }
+    </div>
+}
+
+@helper CreateTag(TagViewModel tag)
+{
+    <div class="rounded shadow-sm p-2 m-2" style="background-color:@tag.Color">
+        <h6 class="text-light">@tag.Name</h6>
+        <input type="hidden" value="@tag.Name" name="tagNames"/>
     </div>
 }

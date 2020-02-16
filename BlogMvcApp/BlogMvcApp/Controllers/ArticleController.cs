@@ -40,15 +40,20 @@ namespace BlogMvcApp.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var tags = new SelectList(ArticleService.GetArticleTags(), "Id", "Name");
+            var tags = new SelectList(ArticleService.GetArticleTags(), "Name", "Name");
             ViewBag.Tags = tags;
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(Article article, ICollection<Tag> tags)
+        public ActionResult Create(Article article, ICollection<string> tagNames)
         {
+            ICollection<Tag> tags = tagNames
+                .Select(tagName => ArticleService.GetTagByName(tagName)).ToList();
+
+
+
             article.Tags = tags;
 
             ArticleService.CreateArticle(article);
@@ -110,6 +115,14 @@ namespace BlogMvcApp.Controllers
             ArticleService.EditArticle(article);
 
             return Redirect($"/Article/Display/{article.Id}");
+        }
+
+        [HttpGet]
+        public ActionResult TagAdder(string tagName)
+        {
+            var tag = ArticleService.GetTagByName(tagName);
+
+            return PartialView(tag.ToTagVm());
         }
     }
 }

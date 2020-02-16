@@ -10,7 +10,7 @@ namespace BlogMvcApp.DLL.Entities
         [Required]
         public string Title { get; set; }
         [Required]
-        [MinLength(100)]
+        [MinLength(500)]
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
         [Required]
@@ -19,8 +19,6 @@ namespace BlogMvcApp.DLL.Entities
         [Required]
         public DateTime Date { get; set; }
         public bool IsDeleted { get; set; }
-        [Required]
-        [Display(Name = "Genre of your article")]
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
 

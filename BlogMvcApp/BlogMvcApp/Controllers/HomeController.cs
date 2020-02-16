@@ -7,7 +7,7 @@ namespace BlogMvcApp.Controllers
 {
     public class HomeController : Controller
     {
-        private const int TextAdLength = 500;
+        private const int TextAdLength = 100;
         private IArticleService ArticleService { get; }
 
         public HomeController(IArticleService articleService)
@@ -32,25 +32,6 @@ namespace BlogMvcApp.Controllers
         public ActionResult Vote(string mood)
         {
             return PartialView("ThankResult");
-        }
-
-        public ActionResult Test()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult ArticleSearch(string name)
-        {
-            var allbooks = ArticleService.GetArticles()
-                .ToList()
-                .ToArticleVm()
-                .Where(a => a.Title.Contains(name))
-                .ToList();
-            if (allbooks.Count <= 0)
-            {
-                return HttpNotFound();
-            }
-            return PartialView(allbooks);
         }
 
         protected override void Dispose(bool disposing)

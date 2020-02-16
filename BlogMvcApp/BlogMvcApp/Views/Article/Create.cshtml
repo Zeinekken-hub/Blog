@@ -1,4 +1,5 @@
-﻿@model BlogMvcApp.DLL.Entities.Article
+﻿@using BlogMvcApp.Models
+@model BlogMvcApp.DLL.Entities.Article
 
 @{
     ViewBag.Title = "Create";
@@ -36,13 +37,11 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.GenreId, "GenreId", htmlAttributes: new { @class = "col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.GenreId, ViewBag.Genres as SelectList)
-                @Html.ValidationMessageFor(model => model.GenreId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <h6>Choose tags:</h6>
+        @Html.DropDownList("tag", ViewBag.Tags as SelectList, new { id = "tagChooser"})
+        <a class="btn btn-light" id="tagAdder">Add tag</a>
+        
+        <div id="tagsBlock" class="card-group"></div>
 
         <input type="hidden" name="Date" value="@DateTime.Now" />
         <input type="hidden" name="IsDeleted" value="false" />
@@ -53,4 +52,31 @@
             </div>
         </div>
     </div>
+}
+@section Scripts
+{
+    <script>
+        
+        $(function () {
+            var tags = [];
+            $('#tagAdder').click(function () {
+                var chooserVal = $("#tagChooser").val();
+                var responseText = "";
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Article/TagAdder?tagName=" + chooserVal,
+                    async: false,
+                    success: function(text) {
+                        responseText = text;
+                    }
+                });
+
+                if (!tags.includes(chooserVal)) {
+                    tags.push(chooserVal);
+                    $('#tagsBlock').append(responseText);
+                }
+            });
+        })
+    </script>
 }
