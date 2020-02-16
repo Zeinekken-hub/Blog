@@ -1,5 +1,4 @@
-﻿@using BlogMvcApp.Models
-@model BlogMvcApp.DLL.Entities.Article
+﻿@model BlogMvcApp.DLL.Entities.Article
 
 @{
     ViewBag.Title = "Create";
@@ -36,12 +35,13 @@
                 @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <h6>Choose tags:</h6>
-        @Html.DropDownList("tag", ViewBag.Tags as SelectList, new { id = "tagChooser"})
-        <a class="btn btn-light" id="tagAdder">Add tag</a>
         
-        <div id="tagsBlock" class="card-group"></div>
+        <div class="form-group">
+            <h6>Choose tags:</h6>
+            @Html.DropDownList("tag", ViewBag.Tags as SelectList, new { id = "tagChooser"})
+            <a class="btn btn-light" id="tagAdder">Add tag</a>
+            <div id="tagsBlock" class="card-group"></div>
+        </div>
 
         <input type="hidden" name="Date" value="@DateTime.Now" />
         <input type="hidden" name="IsDeleted" value="false" />
@@ -76,6 +76,11 @@
                     tags.push(chooserVal);
                     $('#tagsBlock').append(responseText);
                 }
+
+                $('.tag-delete').click(function () {
+                    tags.splice(tags.indexOf($(this).prev().text()), 1);
+                    $(this).closest(".tag-update").empty();
+                });
             });
         })
     </script>

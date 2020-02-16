@@ -59,8 +59,6 @@ namespace BlogMvcApp.BLL.Services
         public IEnumerable<Article> GetArticlesByGenreMood(Questionnaire q)
         {
             return Database.Articles.GetDbSet();
-            //.Include(article => article.Genre)
-            //.Where(article => article.Genre.Mood && q.IsAlone || q.IsStable);
         }
 
         public void CreateArticle(Article article)

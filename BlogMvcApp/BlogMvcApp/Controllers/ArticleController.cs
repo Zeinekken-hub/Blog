@@ -124,5 +124,10 @@ namespace BlogMvcApp.Controllers
 
             return PartialView(tag.ToTagVm());
         }
+
+        public ActionResult DeleteTag()
+        {
+            return new EmptyResult();
+        }
     }
 }
