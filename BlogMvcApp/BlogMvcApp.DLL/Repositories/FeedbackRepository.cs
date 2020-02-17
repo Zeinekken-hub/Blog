@@ -53,5 +53,10 @@ namespace BlogMvcApp.DLL.Repositories
         {
             _context.Entry(item).State = EntityState.Modified;
         }
+
+        public void LoadExplicitCollection(string collectionName, Feedback item)
+        {
+            _context.Entry(item).Collection(collectionName).Load();
+        }
     }
 }

@@ -48,6 +48,11 @@ namespace BlogMvcApp.DLL.Repositories
             return _context.Tags;
         }
 
+        public void LoadExplicitCollection(string collectionName, Tag item)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Tag item)
         {
             throw new NotImplementedException();

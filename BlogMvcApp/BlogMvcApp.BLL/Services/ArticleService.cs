@@ -1,5 +1,4 @@
-﻿using System;
-using BlogMvcApp.BLL.Interfaces;
+﻿using BlogMvcApp.BLL.Interfaces;
 using BlogMvcApp.DLL.Entities;
 using BlogMvcApp.DLL.Interfaces;
 using System.Collections.Generic;
@@ -28,7 +27,7 @@ namespace BlogMvcApp.BLL.Services
                 .Include(a => a.Tags)
                 .Include(p => p.Feedbacks)
                 .FirstOrDefault(a => a.Id == id);
-            
+
             return article;
         }
 
@@ -39,20 +38,31 @@ namespace BlogMvcApp.BLL.Services
 
         public IEnumerable<Article> GetArticlesByTagName(string tagName)
         {
-            if (tagName == "All") 
+            if (tagName == "All")
                 return Database.Articles.GetAll().ToList();
-            else
-            {
-                return Database.Articles.GetDbSet()
-                    .Include(article => article.Tags)
-                    .Where(article => article.Tags.Any(tag => tag.Name == tagName))
-                    .ToList();
-            }
+
+            return Database.Articles.GetDbSet()
+                .Include(article => article.Tags)
+                .Where(article => article.Tags.Any(tag => tag.Name == tagName))
+                .ToList();
         }
 
-        public void EditArticle(Article article)
+        public void EditArticle(Article article, ICollection<string> tagNames)
         {
-            Database.Articles.Update(article);
+            var newArticle = GetArticleById(article.Id);
+            newArticle.Date = article.Date;
+            newArticle.Author = article.Author;
+            newArticle.Text = article.Text;
+            newArticle.IsDeleted = article.IsDeleted;
+            newArticle.Title = article.Title;
+            newArticle.Tags.Clear();
+
+            foreach (var tag in tagNames)
+            {
+                newArticle.Tags.Add(GetTagByName(tag));
+            }
+
+            Database.Articles.Update(newArticle);
             Database.Save();
         }
 
@@ -64,9 +74,6 @@ namespace BlogMvcApp.BLL.Services
         public void CreateArticle(Article article)
         {
             Database.Articles.Create(article);
-
-
-
             Database.Save();
         }
 
@@ -90,6 +97,15 @@ namespace BlogMvcApp.BLL.Services
         public Tag GetTagByName(string tagName)
         {
             return Database.Tags.GetAll().FirstOrDefault(tag => tag.Name == tagName);
+        }
+
+        public void EditArticleWithTags(Article article, ICollection<Tag> tags)
+        {
+            Database.Articles.Update(article);
+            Database.Articles.LoadExplicitCollection("Tags", article);
+            article.Tags.Clear();
+            article.Tags = tags;
+            Database.Save();
         }
     }
 }

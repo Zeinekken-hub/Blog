@@ -324,8 +324,6 @@
     <Content Include="Views\Shared\Tags.cshtml" />
     <Content Include="Views\Home\Voting.cshtml" />
     <Content Include="Views\Home\ThankResult.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
-    <Content Include="Views\Home\ArticleSearch.cshtml" />
     <Content Include="Views\Article\TagAdder.cshtml" />
   </ItemGroup>
   <ItemGroup>

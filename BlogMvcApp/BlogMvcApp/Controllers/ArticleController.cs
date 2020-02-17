@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System;
 using BlogMvcApp.BLL.Interfaces;
 using BlogMvcApp.DLL.Entities;
 using BlogMvcApp.Infrastructure.Mapper;
-using System.Web.Mvc;
 using BlogMvcApp.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using WebGrease.Css.Extensions;
 
 namespace BlogMvcApp.Controllers
 {
@@ -24,7 +25,7 @@ namespace BlogMvcApp.Controllers
         public ActionResult Display(int id = 1)
         {
             var article = ArticleService.GetArticleById(id);
-            if (article == null) return HttpNotFound(); 
+            if (article == null) return HttpNotFound();
 
             return View(article.ToArticleVm());
         }
@@ -34,7 +35,7 @@ namespace BlogMvcApp.Controllers
         {
             FeedbackService.SendFeedback(feedback);
 
-            return Redirect($"/Article/Display/{feedback.Id}");
+            return Redirect($"/Article/Display/{feedback.ArticleId}");
         }
 
         [HttpGet]
@@ -70,9 +71,9 @@ namespace BlogMvcApp.Controllers
             var objToView = new ArticleTagViewModel
             {
                 Tag = tag.ToTagVm(),
-                Articles = articles.ToArticleAdVm(500)
+                Articles = articles.ToArticleAdVm(100)
             };
-             
+
             return View(objToView);
         }
 
@@ -103,16 +104,17 @@ namespace BlogMvcApp.Controllers
             var article = ArticleService.GetArticleById((int)id);
             if (article == null) return HttpNotFound();
 
-            var genres = new SelectList(ArticleService.GetArticleTags(), "Id", "Name");
-            ViewBag.Genres = genres;
+            var tags = new SelectList(ArticleService.GetArticleTags(), "Name", "Name");
+            ViewBag.Tags = tags;
 
             return View(article);
         }
 
         [HttpPost]
-        public ActionResult Edit(Article article)
+        public ActionResult Edit(Article article, ICollection<string> tagNames)
         {
-            ArticleService.EditArticle(article);
+
+            ArticleService.EditArticle(article, tagNames);
 
             return Redirect($"/Article/Display/{article.Id}");
         }

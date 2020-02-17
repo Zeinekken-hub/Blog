@@ -45,6 +45,11 @@ namespace BlogMvcApp.DLL.Repositories
             throw new NotImplementedException();
         }
 
+        public void LoadExplicitCollection(string collectionName, Questionnaire item)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Questionnaire item)
         {
             throw new NotImplementedException();

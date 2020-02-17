@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using AutoMapper;
+﻿using AutoMapper;
 using BlogMvcApp.DLL.Entities;
 using BlogMvcApp.Models;
+using System.Collections.Generic;
 
 namespace BlogMvcApp.Infrastructure.Mapper
 {

@@ -1,4 +1,5 @@
-﻿@model BlogMvcApp.DLL.Entities.Article
+﻿@using BlogMvcApp.Infrastructure.Mapper
+@model BlogMvcApp.DLL.Entities.Article
 
 @{
     ViewBag.Title = "Edit";
@@ -9,8 +10,8 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
+
+    <div>
         <h4>Article</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -42,6 +43,14 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <h6>Choose tags:</h6>
+            @Html.DropDownList("tag", ViewBag.Tags as SelectList, new { id = "tagChooser" })
+            <a class="btn btn-light" id="tagAdder">Add tag</a>
+            <div id="tagsBlock" class="card-group">
+                @Helpers.CreateTagsForEdit(Model.Tags.ToTagVm())
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-10">
@@ -51,3 +60,42 @@
     </div>
 }
 
+@section Scripts
+{
+    <script>
+
+        $(function () {
+
+            var tags = $(".tag-text").text().split(/(?=[A-Z])/); // "ForExm" => ["For", "Exm"]
+
+            $('.tag-delete').click(function () {
+                tags.splice(tags.indexOf($(this).prev().text()), 1);
+                $(this).closest(".tag-update").empty();
+            });
+
+            $('#tagAdder').click(function () {
+                var chooserVal = $("#tagChooser").val();
+                var responseText = "";
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Article/TagAdder?tagName=" + chooserVal,
+                    async: false,
+                    success: function(text) {
+                        responseText = text;
+                    }
+                });
+
+                if (!tags.includes(chooserVal)) {
+                    tags.push(chooserVal);
+                    $('#tagsBlock').append(responseText);
+                }
+
+                $('.tag-delete').click(function () {
+                    tags.splice(tags.indexOf($(this).prev().text()), 1);
+                    $(this).closest(".tag-update").empty();
+                });
+            });
+        })
+    </script>
+}

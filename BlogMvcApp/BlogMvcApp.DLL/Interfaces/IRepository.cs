@@ -15,7 +15,7 @@ namespace BlogMvcApp.DLL.Interfaces
         void Create(T item);
 
         void Update(T item);
-
+        void LoadExplicitCollection(string collectionName, T item);
         void Delete(int id);
 
         DbSet<T> GetDbSet();

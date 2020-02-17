@@ -1,5 +1,4 @@
-﻿@using System.Web.Mvc.Ajax
-@using BlogMvcApp.Models
+﻿@using BlogMvcApp.Models
 
 
 @helper CreateCustomCheckBox(string name, string id, string labelText)
@@ -15,7 +14,7 @@
 {
     <select name="@name" class="custom-select" required>
         <option>Choose...</option>
-        @foreach (string option in options)
+        @foreach (var option in options)
         {
             <option value=@option>@option</option>
         }
@@ -86,4 +85,18 @@
             <input type="hidden" value="@tag.Name" name="tagNames" />
         </div>
     </div>
+}
+
+@helper CreateTagsForEdit(IEnumerable<TagViewModel> tags)
+{
+    foreach (var tag in tags)
+    {
+        <div class="tag-update">
+            <div class="rounded shadow-sm p-2 m-2" style="background-color: @tag.Color">
+                <h6 class="text-light d-inline tag-text">@tag.Name</h6>
+                <a class="tag-delete fa fa-close ml-2" style="cursor: pointer"></a>
+                <input type="hidden" value="@tag.Name" name="tagNames"/>
+            </div>
+        </div>
+    }
 }
