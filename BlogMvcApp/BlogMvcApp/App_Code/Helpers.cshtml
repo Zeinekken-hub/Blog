@@ -1,4 +1,5 @@
-﻿@using BlogMvcApp.Models
+﻿@using BlogMvcApp.BLL.BusinessModels
+@using BlogMvcApp.Models
 
 
 @helper CreateCustomCheckBox(string name, string id, string labelText)
@@ -95,8 +96,22 @@
             <div class="rounded shadow-sm p-2 m-2" style="background-color: @tag.Color">
                 <h6 class="text-light d-inline tag-text">@tag.Name</h6>
                 <a class="tag-delete fa fa-close ml-2" style="cursor: pointer"></a>
-                <input type="hidden" value="@tag.Name" name="tagNames"/>
+                <input type="hidden" value="@tag.Name" name="tagNames" />
             </div>
         </div>
     }
 }
+
+@*@helper CretePageLinks(PaginationModel pagination, Func<int, string> pageUrl)
+{
+    if (pagination.EndPage > 1)
+    {
+        <ul class="pagination">
+            @if (pagination.CurrentPage > 1)
+            {
+
+            }
+        </ul>
+    }
+}*@
+

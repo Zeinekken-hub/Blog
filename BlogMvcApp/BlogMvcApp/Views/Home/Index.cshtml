@@ -1,13 +1,14 @@
-﻿@model IEnumerable<BlogMvcApp.Models.ArticleAdViewModel>
-
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<BlogMvcApp.Models.ArticleAdViewModel>
 @{
     ViewBag.Title = "Blog";
 }
-
 <h2 class="text-center">Newest articles</h2>
 <hr />
 
-@Helpers.CreateArticles(Model)
+@Helpers.CreateArticles(Model.ToList())
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
 
 @section Voting
 {

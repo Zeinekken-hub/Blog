@@ -6,15 +6,16 @@ using BlogMvcApp.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using PagedList;
 using WebGrease.Css.Extensions;
 
 namespace BlogMvcApp.Controllers
 {
     public class ArticleController : Controller
     {
+        private const int PageSize = 4;
         private IArticleService ArticleService { get; }
         private IFeedbackService FeedbackService { get; }
-
         public ArticleController(IArticleService articleService,
                                  IFeedbackService feedbackService)
         {
@@ -53,8 +54,6 @@ namespace BlogMvcApp.Controllers
             ICollection<Tag> tags = tagNames
                 .Select(tagName => ArticleService.GetTagByName(tagName)).ToList();
 
-
-
             article.Tags = tags;
 
             ArticleService.CreateArticle(article);
@@ -63,15 +62,17 @@ namespace BlogMvcApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult Tag(string tagName)
+        public ActionResult Tag(string tagName, int page = 1)
         {
+            if (tagName == null) return HttpNotFound();
             var articles = ArticleService.GetArticlesByTagName(tagName).ToList();
             var tag = ArticleService.GetTagByName(tagName);
 
             var objToView = new ArticleTagViewModel
             {
                 Tag = tag.ToTagVm(),
-                Articles = articles.ToArticleAdVm(100)
+                Articles = articles.ToArticleAdVm(100).ToPagedList(page, PageSize),
+                PageSize = PageSize
             };
 
             return View(objToView);
@@ -113,7 +114,6 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult Edit(Article article, ICollection<string> tagNames)
         {
-
             ArticleService.EditArticle(article, tagNames);
 
             return Redirect($"/Article/Display/{article.Id}");

@@ -1,10 +1,16 @@
-﻿@model BlogMvcApp.Models.ArticleTagViewModel
+﻿@using PagedList.Mvc
+@model BlogMvcApp.Models.ArticleTagViewModel
 
 @{
     ViewBag.Title = "Genre";
 }
 
-<h2 class="text-center">All articles with Tag: "@(Model.Tag.Name)"</h2>
+<h2 class="text-center">All articles with Tag: "@Model.Tag.Name"</h2>
 <hr />
 
-@Helpers.CreateArticles(Model.Articles)
+@Helpers.CreateArticles(Model.Articles.ToList())
+
+@if (Model.Articles.ToList().Count > Model.PageSize)
+{
+    @Html.PagedListPager(Model.Articles, page => Url.Action("Tag", new {tagName = Model.Tag.Name, page}))
+}

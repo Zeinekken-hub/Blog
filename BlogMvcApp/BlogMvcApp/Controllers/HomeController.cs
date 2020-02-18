@@ -2,12 +2,14 @@
 using BlogMvcApp.Infrastructure.Mapper;
 using System.Linq;
 using System.Web.Mvc;
+using PagedList;
 
 namespace BlogMvcApp.Controllers
 {
     public class HomeController : Controller
     {
-        private const int TextAdLength = 100;
+        private const int TextAdLength = 200;
+        private const int PageSize = 4;
         private IArticleService ArticleService { get; }
 
         public HomeController(IArticleService articleService)
@@ -15,11 +17,11 @@ namespace BlogMvcApp.Controllers
             ArticleService = articleService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            var articles = ArticleService.GetArticles().ToList();
+            var articles = ArticleService.GetArticles().ToList().OrderByDescending(x => x.Date);
 
-            return View(articles.ToArticleAdVm(TextAdLength));
+            return View(articles.ToArticleAdVm(TextAdLength).ToPagedList(page, PageSize));
         }
 
         public ActionResult Tags()

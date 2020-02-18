@@ -39,7 +39,7 @@ namespace BlogMvcApp.BLL.Services
         public IEnumerable<Article> GetArticlesByTagName(string tagName)
         {
             if (tagName == "All")
-                return Database.Articles.GetAll().ToList();
+                return Database.Articles.GetAll().Where(article => !article.IsDeleted).ToList();
 
             return Database.Articles.GetDbSet()
                 .Include(article => article.Tags)
