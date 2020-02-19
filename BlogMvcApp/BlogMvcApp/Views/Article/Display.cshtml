@@ -38,3 +38,19 @@
 {
     ArticleId = Model.Id
 })
+
+@section RightSideBar
+{
+    @Html.Partial("RightSideBar")
+}
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            $('#right-column').removeClass("col-lg-2").addClass("col-lg-1");
+            $('#left-column').removeClass("col-lg-2").addClass("col-lg-1");
+            //$('#main').removeClass("col-lg-10").addClass("col-lg-8");
+        })
+    </script>
+}

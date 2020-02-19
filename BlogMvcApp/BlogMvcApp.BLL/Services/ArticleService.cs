@@ -43,7 +43,8 @@ namespace BlogMvcApp.BLL.Services
 
             return Database.Articles.GetDbSet()
                 .Include(article => article.Tags)
-                .Where(article => article.Tags.Any(tag => tag.Name == tagName))
+                .Where(article => article.Tags.Any(tag => tag.Name == tagName
+                && !article.IsDeleted))
                 .ToList();
         }
 

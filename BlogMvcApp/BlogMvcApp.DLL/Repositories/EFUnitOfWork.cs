@@ -1,7 +1,9 @@
 ﻿using BlogMvcApp.DLL.EF;
 using BlogMvcApp.DLL.Entities;
+using BlogMvcApp.DLL.Identity;
 using BlogMvcApp.DLL.Interfaces;
 using System;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BlogMvcApp.DLL.Repositories
 {
@@ -12,9 +14,13 @@ namespace BlogMvcApp.DLL.Repositories
         private FeedbackRepository _feedbackRepository;
         private QuestionnaireRepository _questionnaireRepository;
         private TagRepository _tagRepository;
+
         public EFUnitOfWork()
         {
             _context = new BlogContext();
+            UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(_context));
+            RoleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(_context));
+            ClientManager = new ClientManager(_context);
         }
 
         public IRepository<Feedback> Feedbacks => _feedbackRepository
@@ -29,6 +35,13 @@ namespace BlogMvcApp.DLL.Repositories
         public IRepository<Tag> Tags => _tagRepository
                                         ?? (_tagRepository = new TagRepository(_context));
 
+        public IClientManager ClientManager { get; }
+
+        public ApplicationRoleManager RoleManager { get; }
+
+        public ApplicationUserManager UserManager { get; }
+
+
         public void Save()
         {
             _context.SaveChanges();
@@ -41,6 +54,9 @@ namespace BlogMvcApp.DLL.Repositories
             if (_disposed) return;
             if (disposing)
             {
+                UserManager.Dispose();
+                RoleManager.Dispose();
+                ClientManager.Dispose();
                 _context.Dispose();
             }
             _disposed = true;

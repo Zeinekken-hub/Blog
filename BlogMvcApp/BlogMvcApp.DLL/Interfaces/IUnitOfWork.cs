@@ -1,5 +1,6 @@
 ﻿using BlogMvcApp.DLL.Entities;
 using System;
+using BlogMvcApp.DLL.Identity;
 
 namespace BlogMvcApp.DLL.Interfaces
 {
@@ -9,6 +10,9 @@ namespace BlogMvcApp.DLL.Interfaces
         IRepository<Article> Articles { get; }
         IRepository<Questionnaire> Questionnaires { get; }
         IRepository<Tag> Tags { get; }
+        IClientManager ClientManager { get; }
+        ApplicationRoleManager RoleManager { get; }
+        ApplicationUserManager UserManager { get; }
         void Save();
     }
 }

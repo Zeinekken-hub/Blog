@@ -10,21 +10,19 @@
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 
 
-@section Voting
+@section RightSideBar
 {
-    <h5>Voting</h5>
+    @Html.Partial("RightSideBar")
+}
 
-    <p class="font-weight-bold">How are you today?</p>
-    <div id="voting">
-        @using (Ajax.BeginForm("Vote", new AjaxOptions { UpdateTargetId = "voting" }))
-        {
-            <div class="form-group">
-                @Helpers.CreateCustomRadioButton("mood", "r1", "happy", "Happy")
-                @Helpers.CreateCustomRadioButton("mood", "r2", "normal", "Normal")
-                @Helpers.CreateCustomRadioButton("mood", "r3", "bad", "Bad")
-            </div>
 
-            <input type="submit" class="btn btn-primary" value="Submit" />
-        }
-    </div>
+@section Scripts
+{
+    <script>
+        $(function () {
+            $('#right-column').removeClass("col-lg-2").addClass("col-lg-1");
+            $('#left-column').removeClass("col-lg-2").addClass("col-lg-1");
+            //$('#main').removeClass("col-lg-10").addClass("col-lg-8");
+        })
+    </script>
 }

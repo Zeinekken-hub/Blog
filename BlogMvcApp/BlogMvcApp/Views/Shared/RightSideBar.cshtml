@@ -1,0 +1,24 @@
+﻿<div class="col-lg-2 col-sm-2 right-side-bar">
+    <div class="flex-column">
+        <h4>Tags</h4>
+        @Html.Action("Tags", "Home")
+        <h5>Voting</h5>
+
+        <p class="font-weight-bold">How are you today?</p>
+        <div id="voting">
+            @using (Ajax.BeginForm("Vote", "Home", new AjaxOptions { UpdateTargetId = "voting" }))
+            {
+                <div class="form-group">
+                    @Helpers.CreateCustomRadioButton("mood", "r1", "happy", "Happy")
+                    @Helpers.CreateCustomRadioButton("mood", "r2", "normal", "Normal")
+                    @Helpers.CreateCustomRadioButton("mood", "r3", "bad", "Bad")
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Submit" />
+            }
+        </div>
+    </div>
+</div>
+
+
+

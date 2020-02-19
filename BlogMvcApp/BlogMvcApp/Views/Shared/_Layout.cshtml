@@ -32,23 +32,20 @@
                     <a class="nav-link" href="/Profile/Index">Profile</a>
                 </li>
             </ul>
+            <span>
+                <a class="btn btn-primary" href="/Account/Register">Register</a>
+                <a class="btn btn-info" href="/Account/Login">Login</a>
+            </span>
         </div>
     </nav>
-
-    <main class="min-vh-100">
+    <main class="min-vh-100" id="main">
         <div class="row mt-3">
-            <div class="col-lg-1 col-sm-1"></div>
+            <div class="col-lg-2 col-sm-1" id="right-column"></div>
             <div class="col-lg-8 col-sm-10 col-12">
                 @RenderBody()
             </div>
-            <div class="col-lg-2 col-sm-2">
-                <div class="flex-column">
-                    <h4>Tags</h4>
-                    @Html.Action("Tags", "Home")
-                    @RenderSection("Voting", false)
-                </div>
-            </div>
-            <div class="col-lg-1 col-sm-1"></div>
+            @RenderSection("RightSideBar", false)
+            <div class="col-lg-2 col-sm-1" id="left-column"></div>
         </div>
     </main>
 
@@ -63,6 +60,13 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/PagedList.css")
+    @Styles.Render("~/Content/nprogress.css")
     @RenderSection("Scripts", false)
+    <script src="~/Scripts/nprogress.js"></script>
+
+    <script>
+        NProgress.start();
+        NProgress.done();
+    </script>
 </body>
 </html>

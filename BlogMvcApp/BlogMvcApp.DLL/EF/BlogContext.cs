@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BlogMvcApp.DLL.EF
 {
-    public class BlogContext : DbContext
+    public class BlogContext : IdentityDbContext<ApplicationUser>
     {
         public BlogContext(string connectionString) : base(connectionString)
         {
@@ -14,7 +15,7 @@ namespace BlogMvcApp.DLL.EF
         public BlogContext() : base("DefaultConnection")
         {
         }
-
+        public DbSet<ClientProfile> ClientProfiles { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Questionnaire> Questionnaires { get; set; }
