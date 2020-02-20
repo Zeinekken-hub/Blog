@@ -6,16 +6,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BlogMvcApp.DLL.EF
 {
-    public class BlogContext : IdentityDbContext<ApplicationUser>
+    public class BlogContext : IdentityDbContext<BlogUser>
     {
-        public BlogContext(string connectionString) : base(connectionString)
-        {
-        }
-
         public BlogContext() : base("DefaultConnection")
         {
         }
-        public DbSet<ClientProfile> ClientProfiles { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Questionnaire> Questionnaires { get; set; }
@@ -42,7 +37,6 @@ namespace BlogMvcApp.DLL.EF
             {
                 new Article
                 {
-                    Author = "George",
                     Date = DateTime.Now,
                     IsDeleted = false,
                     Title = "Not bad for the first time",
@@ -62,7 +56,6 @@ namespace BlogMvcApp.DLL.EF
                 },
                 new Article
                 {
-                    Author = "ApppSlayer",
                     Date = DateTime.Now,
                     IsDeleted = false,
                     Title = "Not bad for the first time",
@@ -82,7 +75,6 @@ namespace BlogMvcApp.DLL.EF
                 },
                 new Article
                 {
-                    Author = "Boomer",
                     Date = DateTime.Now,
                     IsDeleted = false,
                     Title = "Not bad for the first time",

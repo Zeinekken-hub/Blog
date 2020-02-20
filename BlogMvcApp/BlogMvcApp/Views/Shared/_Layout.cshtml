@@ -32,10 +32,18 @@
                     <a class="nav-link" href="/Profile/Index">Profile</a>
                 </li>
             </ul>
-            <span>
-                <a class="btn btn-primary" href="/Account/Register">Register</a>
-                <a class="btn btn-info" href="/Account/Login">Login</a>
-            </span>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <h6 class="mr-2">Hello, @User.Identity.Name</h6> 
+                <a class="btn btn-primary" href="/Account/Logout">Logout</a>
+            }
+            else
+            {
+                <span>
+                    <a class="btn btn-primary" href="/Account/Register">Register</a>
+                    <a class="btn btn-info" href="/Account/Login">Login</a>
+                </span>
+            }
         </div>
     </nav>
     <main class="min-vh-100" id="main">

@@ -14,33 +14,22 @@ namespace BlogMvcApp.DLL.Repositories
         private FeedbackRepository _feedbackRepository;
         private QuestionnaireRepository _questionnaireRepository;
         private TagRepository _tagRepository;
-
         public EFUnitOfWork()
         {
             _context = new BlogContext();
-            UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(_context));
+            UserManager = new BlogUserManager(new UserStore<BlogUser>(_context));
             RoleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(_context));
-            ClientManager = new ClientManager(_context);
+            _feedbackRepository = new FeedbackRepository(_context);
+            _articleRepository = new ArticleRepository(_context);
+            _questionnaireRepository = new QuestionnaireRepository(_context);
+            _tagRepository = new TagRepository(_context);
         }
-
-        public IRepository<Feedback> Feedbacks => _feedbackRepository
-                                                  ?? (_feedbackRepository = new FeedbackRepository(_context));
-
-        public IRepository<Article> Articles => _articleRepository
-                                                ?? (_articleRepository = new ArticleRepository(_context));
-
-        public IRepository<Questionnaire> Questionnaires => _questionnaireRepository
-                                                            ?? (_questionnaireRepository =
-                                                                new QuestionnaireRepository(_context));
-        public IRepository<Tag> Tags => _tagRepository
-                                        ?? (_tagRepository = new TagRepository(_context));
-
-        public IClientManager ClientManager { get; }
-
+        public IRepository<Feedback> Feedbacks => _feedbackRepository;
+        public IRepository<Article> Articles => _articleRepository;
+        public IRepository<Questionnaire> Questionnaires => _questionnaireRepository;
+        public IRepository<Tag> Tags => _tagRepository;
         public ApplicationRoleManager RoleManager { get; }
-
-        public ApplicationUserManager UserManager { get; }
-
+        public BlogUserManager UserManager { get; }
 
         public void Save()
         {
@@ -56,7 +45,6 @@ namespace BlogMvcApp.DLL.Repositories
             {
                 UserManager.Dispose();
                 RoleManager.Dispose();
-                ClientManager.Dispose();
                 _context.Dispose();
             }
             _disposed = true;

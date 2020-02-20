@@ -52,7 +52,7 @@ namespace BlogMvcApp.BLL.Services
         {
             var newArticle = GetArticleById(article.Id);
             newArticle.Date = article.Date;
-            newArticle.Author = article.Author;
+            newArticle.BlogUser = article.BlogUser;
             newArticle.Text = article.Text;
             newArticle.IsDeleted = article.IsDeleted;
             newArticle.Title = article.Title;

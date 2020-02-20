@@ -2,6 +2,7 @@
 using BlogMvcApp.DLL.Entities;
 using BlogMvcApp.Models;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 
 namespace BlogMvcApp.Infrastructure.Mapper
 {
@@ -20,11 +21,12 @@ namespace BlogMvcApp.Infrastructure.Mapper
         public static IEnumerable<ArticleAdViewModel> ToArticleAdVm(this IEnumerable<Article> articles, int textAdLength)
         {
             return new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Article, ArticleAdViewModel>()
-                    .ForMember("Text", opt => opt.MapFrom(item => item.Text.Substring(0, textAdLength)))
-                    .ForMember("CommentCount", opt => opt.MapFrom(item => item.Feedbacks.Count));
-            })
+                {
+                    cfg.CreateMap<Article, ArticleAdViewModel>()
+                        .ForMember("Text", opt => opt.MapFrom(item => item.Text.Substring(0, textAdLength)))
+                        .ForMember("CommentCount", opt => opt.MapFrom(item => item.Feedbacks.Count))
+                        .ForMember("Author", opt => opt.MapFrom(item => item.BlogUser.UserName));
+                })
                 .CreateMapper()
                 .Map<IEnumerable<Article>, IEnumerable<ArticleAdViewModel>>(articles);
         }

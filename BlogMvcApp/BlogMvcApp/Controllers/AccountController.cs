@@ -15,11 +15,6 @@ namespace BlogMvcApp.Controllers
 
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
-        public AccountController(IUserService userService)
-        {
-
-        }
-
         public ActionResult Login()
         {
             return View();
@@ -29,7 +24,7 @@ namespace BlogMvcApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
-            SetInitialDataAsync();
+            SetInitialData();
             if (ModelState.IsValid)
             {
                 var userDto = new UserDto { Email = model.Email, Password = model.Password };
@@ -63,10 +58,11 @@ namespace BlogMvcApp.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-            SetInitialDataAsync();
+            SetInitialData();
             if (ModelState.IsValid)
             {
                 var userDto = new UserDto
@@ -83,17 +79,22 @@ namespace BlogMvcApp.Controllers
             }
             return View(model);
         }
-        private void SetInitialDataAsync()
+        private void SetInitialData()
         {
             UserService.SetInitialData(new UserDto
             {
-                Email = "somemail@mail.ru",
-                UserName = "somemail@mail.ru",
-                Password = "ad46D_ewr3",
+                Email = "admin@mail.ru",
+                UserName = "admin@mail.ru",
+                Password = "123123",
                 Name = "Семен Семенович Горбунков",
                 Address = "ул. Спортивная, д.30, кв.75",
                 Role = "admin",
             }, new List<string> { "user", "admin" });
+        }
+
+        public ActionResult Display(string authorName)
+        {
+            return View(UserService.GetUserByUserName(authorName));
         }
     }
 }

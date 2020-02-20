@@ -1,5 +1,4 @@
-﻿@using BlogMvcApp.BLL.BusinessModels
-@using BlogMvcApp.Models
+﻿@using BlogMvcApp.Models
 
 
 @helper CreateCustomCheckBox(string name, string id, string labelText)
@@ -51,7 +50,7 @@
                 </h3>
                 <div class="mb-1 text-muted">
                     @article.Date by
-                    <i>@article.Author</i>
+                    <a href="/Account/Display?authorName=@article.Author">@article.Author</a>
                 </div>
                 <p class="card-text mb-auto">@article.Text...</p>
                 <div class="container">
@@ -102,16 +101,4 @@
     }
 }
 
-@*@helper CretePageLinks(PaginationModel pagination, Func<int, string> pageUrl)
-{
-    if (pagination.EndPage > 1)
-    {
-        <ul class="pagination">
-            @if (pagination.CurrentPage > 1)
-            {
-
-            }
-        </ul>
-    }
-}*@
 

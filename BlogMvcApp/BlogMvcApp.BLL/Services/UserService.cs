@@ -1,13 +1,12 @@
-﻿using System.Threading.Tasks;
-using System.Security.Claims;
-using System.Collections.Generic;
-using System.Linq;
-using BlogMvcApp.BLL.Infrastructure;
+﻿using BlogMvcApp.BLL.Infrastructure;
 using BlogMvcApp.BLL.Interfaces;
 using BlogMvcApp.BLL.Models;
 using BlogMvcApp.DLL.Entities;
 using BlogMvcApp.DLL.Interfaces;
 using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 
 namespace BlogMvcApp.BLL.Services
 {
@@ -24,16 +23,13 @@ namespace BlogMvcApp.BLL.Services
             var user = Database.UserManager.FindByEmail(userDto.Email);
             if (user != null) return new OperationDetails(false, "User with the same login exists", "Email");
 
-            user = new ApplicationUser { Email = userDto.Email, UserName = userDto.Email };
+            user = new BlogUser { Email = userDto.Email, UserName = userDto.Email };
             var result = Database.UserManager.Create(user, userDto.Password);
 
-            if (result.Errors.Any())
-                return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
+            if (result.Errors.Any()) return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
 
             Database.UserManager.AddToRole(user.Id, userDto.Role);
 
-            var clientProfile = new ClientProfile { Id = user.Id, Name = userDto.Name };
-            Database.ClientManager.Create(clientProfile);
             Database.Save();
             return new OperationDetails(true, "Registration succed", "");
 
@@ -52,11 +48,25 @@ namespace BlogMvcApp.BLL.Services
             foreach (var roleName in roles)
             {
                 var role = Database.RoleManager.FindByName(roleName);
+
                 if (role != null) continue;
+
                 role = new ApplicationRole { Name = roleName };
                 Database.RoleManager.Create(role);
             }
             Create(adminDto);
+        }
+
+        public UserDto GetUserByUserName(string username)
+        {
+            var user = Database.UserManager.Users.FirstOrDefault(u => u.UserName == username);
+            if (user == null) return null;
+            return new UserDto
+            {
+                Email = user.Email,
+                Password = user.PasswordHash,
+                UserName = user.UserName
+            };
         }
 
         public void Dispose()

@@ -6,8 +6,11 @@
 
 <h2>
     @Model.Title
-    <a class="float-right fa fa-trash mr-3" href="/Article/Delete/@Model.Id"></a>
-    <a class="float-right fa fa-edit mr-3" href="/Article/Edit/@Model.Id"></a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a class="float-right fa fa-trash mr-3" href="/Article/Delete/@Model.Id"></a>
+        <a class="float-right fa fa-edit mr-3" href="/Article/Edit/@Model.Id"></a>
+    }
 </h2>
 
 @Helpers.CreateTags(Model.Tags)

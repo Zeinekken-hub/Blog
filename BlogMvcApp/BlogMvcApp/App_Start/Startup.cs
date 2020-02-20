@@ -14,12 +14,17 @@ namespace BlogMvcApp.App_Start
     {
         public void Configuration(IAppBuilder app)
         {
-            app.CreatePerOwinContext(() => (IUserService)new UserService(new EFUnitOfWork()));
+            app.CreatePerOwinContext(CreateUserService);
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
             });
+        }
+
+        private static IUserService CreateUserService()
+        {
+            return new UserService(new EFUnitOfWork());
         }
     }
 }

@@ -14,15 +14,12 @@ namespace BlogMvcApp.DLL.Entities
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
         [Required]
-        [MinLength(2)]
-        public string Author { get; set; }
-        [Required]
         public DateTime Date { get; set; }
         public bool IsDeleted { get; set; }
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
-
-
+        public virtual BlogUser BlogUser { get; set; }
+        public string BlogUserId { get; set; }
         public Article()
         {
             Tags = new List<Tag>();

@@ -1,5 +1,4 @@
-﻿using System;
-using BlogMvcApp.BLL.Interfaces;
+﻿using BlogMvcApp.BLL.Interfaces;
 using BlogMvcApp.DLL.Entities;
 using BlogMvcApp.Infrastructure.Mapper;
 using BlogMvcApp.Models;
@@ -30,6 +29,7 @@ namespace BlogMvcApp.Controllers
             return View(article.ToArticleVm());
         }
 
+        [Authorize(Roles = "user")]
         [HttpPost]
         public ActionResult SendFeedback(Feedback feedback)
         {
@@ -38,6 +38,7 @@ namespace BlogMvcApp.Controllers
             return Redirect($"/Article/Display/{feedback.ArticleId}");
         }
 
+        [Authorize(Roles = "user")]
         [HttpGet]
         public ActionResult Create()
         {
@@ -47,6 +48,7 @@ namespace BlogMvcApp.Controllers
             return View();
         }
 
+        [Authorize(Roles = "user")]
         [HttpPost]
         public ActionResult Create(Article article, ICollection<string> tagNames)
         {
@@ -77,6 +79,7 @@ namespace BlogMvcApp.Controllers
             return View(objToView);
         }
 
+        [Authorize(Roles = "user")]
         [HttpGet]
         public ActionResult Delete(int? id)
         {
@@ -89,6 +92,7 @@ namespace BlogMvcApp.Controllers
             return View(article);
         }
 
+        [Authorize(Roles = "user")]
         [HttpPost]
         public ActionResult Delete(Article article)
         {
@@ -97,6 +101,7 @@ namespace BlogMvcApp.Controllers
             return Redirect("/Home/Index");
         }
 
+        [Authorize(Roles = "user")]
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -110,6 +115,7 @@ namespace BlogMvcApp.Controllers
             return View(article);
         }
 
+        [Authorize(Roles = "user")]
         [HttpPost]
         public ActionResult Edit(Article article, ICollection<string> tagNames)
         {
@@ -118,6 +124,7 @@ namespace BlogMvcApp.Controllers
             return Redirect($"/Article/Display/{article.Id}");
         }
 
+        [Authorize(Roles = "user")]
         [HttpGet]
         public ActionResult TagAdder(string tagName)
         {
@@ -126,6 +133,7 @@ namespace BlogMvcApp.Controllers
             return PartialView(tag.ToTagVm());
         }
 
+        [Authorize(Roles = "user")]
         public ActionResult DeleteTag()
         {
             return new EmptyResult();

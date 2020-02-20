@@ -6,6 +6,7 @@ using PagedList;
 
 namespace BlogMvcApp.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private const int TextAdLength = 200;
@@ -29,7 +30,7 @@ namespace BlogMvcApp.Controllers
             return PartialView(ArticleService.GetArticleTags().ToTagVm());
         }
 
-
+        [Authorize(Roles = "user")]
         [HttpPost]
         public ActionResult Vote(string mood)
         {

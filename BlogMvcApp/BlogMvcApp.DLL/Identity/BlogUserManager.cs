@@ -3,9 +3,9 @@ using Microsoft.AspNet.Identity;
 
 namespace BlogMvcApp.DLL.Identity
 {
-    public class ApplicationUserManager : UserManager<ApplicationUser>
+    public class BlogUserManager : UserManager<BlogUser>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
+        public BlogUserManager(IUserStore<BlogUser> store)
             : base(store)
         {
         }

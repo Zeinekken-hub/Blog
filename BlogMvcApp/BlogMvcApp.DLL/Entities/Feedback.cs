@@ -17,9 +17,10 @@ namespace BlogMvcApp.DLL.Entities
         [Required]
         [Range(0, 5)]
         public int Mark { get; set; }
-
         public virtual Article Article { get; set; }
         [Required]
         public int ArticleId { get; set; }
+        public virtual BlogUser BlogUser { get; set; }
+        public string BlogUserId { get; set; }
     }
 }
