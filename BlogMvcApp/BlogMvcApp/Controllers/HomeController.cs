@@ -6,7 +6,7 @@ using PagedList;
 
 namespace BlogMvcApp.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class HomeController : Controller
     {
         private const int TextAdLength = 200;
@@ -17,14 +17,14 @@ namespace BlogMvcApp.Controllers
         {
             ArticleService = articleService;
         }
-
+        [AllowAnonymous]
         public ActionResult Index(int page = 1)
         {
             var articles = ArticleService.GetArticles().ToList().OrderByDescending(x => x.Date);
 
             return View(articles.ToArticleAdVm(TextAdLength).ToPagedList(page, PageSize));
         }
-
+        [AllowAnonymous]
         public ActionResult Tags()
         {
             return PartialView(ArticleService.GetArticleTags().ToTagVm());
@@ -34,7 +34,10 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult Vote(string mood)
         {
-            return PartialView("ThankResult");
+            if (mood != "") return PartialView("ThankResult");
+
+            ModelState.AddModelError("", "Choose option!");////
+            return View("Index");
         }
 
         protected override void Dispose(bool disposing)

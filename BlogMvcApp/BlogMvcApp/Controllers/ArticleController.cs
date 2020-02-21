@@ -1,11 +1,12 @@
-﻿using BlogMvcApp.BLL.Interfaces;
+﻿using BlogMvcApp.Attributes;
+using BlogMvcApp.BLL.Interfaces;
 using BlogMvcApp.DLL.Entities;
 using BlogMvcApp.Infrastructure.Mapper;
 using BlogMvcApp.Models;
+using PagedList;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using PagedList;
 
 namespace BlogMvcApp.Controllers
 {
@@ -52,12 +53,15 @@ namespace BlogMvcApp.Controllers
         [HttpPost]
         public ActionResult Create(Article article, ICollection<string> tagNames)
         {
-            ICollection<Tag> tags = tagNames
-                .Select(tagName => ArticleService.GetTagByName(tagName)).ToList();
+            if (ModelState.IsValid)
+            {
+                ICollection<Tag> tags = tagNames
+                    .Select(tagName => ArticleService.GetTagByName(tagName)).ToList();
 
-            article.Tags = tags;
+                article.Tags = tags;
 
-            ArticleService.CreateArticle(article);
+                ArticleService.CreateArticle(article);
+            }
 
             return Redirect("/Home/Index");
         }

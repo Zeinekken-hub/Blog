@@ -7,10 +7,33 @@
 
 <h2 class="text-center">All articles with Tag: "@Model.Tag.Name"</h2>
 <hr />
-
-@Helpers.CreateArticles(Model.Articles.ToList())
+@if (Model.Articles.Count == 0)
+{
+    <h4 class="text-center">No matches.</h4>
+}
+else
+{
+    @Helpers.CreateArticles(Model.Articles.ToList())
+}
 
 @if (Model.Articles.ToList().Count > Model.PageSize)
 {
-    @Html.PagedListPager(Model.Articles, page => Url.Action("Tag", new {tagName = Model.Tag.Name, page}))
+    @Html.PagedListPager(Model.Articles, page => Url.Action("Tag", new { tagName = Model.Tag.Name, page }))
+}
+
+@section RightSideBar
+{
+    @Html.Partial("RightSideBar")
+}
+
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            $('#right-column').removeClass("col-lg-2").addClass("col-lg-1");
+            $('#left-column').removeClass("col-lg-2").addClass("col-lg-1");
+            //$('#main').removeClass("col-lg-10").addClass("col-lg-8");
+        })
+    </script>
 }

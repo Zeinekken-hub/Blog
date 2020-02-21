@@ -36,14 +36,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             <h6>Choose tags:</h6>
             @Html.DropDownList("tag", ViewBag.Tags as SelectList, new { id = "tagChooser" })
             <a class="btn btn-light" id="tagAdder">Add tag</a>
